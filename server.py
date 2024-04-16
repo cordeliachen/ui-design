@@ -18,13 +18,12 @@ def start():
 def home():
     return render_template("home.html")
 
-
-@app.route("/learn/<id>")
-def view(id):
-    lesson = data.get(id)
-    print(lesson)
-    if lesson:
-        return render_template("learn.html", lesson=lesson)
+@app.route('/learn/<int:lesson_id>')
+def learn(lesson_id):
+    with open('static/data/lessons.json') as f:
+        lessons = json.load(f)
+    lesson = lessons.get(str(lesson_id), {})
+    return render_template('learn.html', lesson=lesson)
 
 
 if __name__ == "__main__":
