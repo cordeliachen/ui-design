@@ -1,1 +1,11 @@
 {% extends "layout.html" %} {% block content %} HOME {% endblock %}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 text-center">
+        <h1>Welcome to How to Crochet!</h1>
+        <p class="lead">Discover the joy of crocheting. Learn stitches, techniques, and create beautiful patterns!</p>
+        <a href="{{ url_for('learn', lesson_number=1) }}" class="btn btn-primary btn-lg">Start Learning</a>
+    </div>
+</div>
+{% endblock %}
+
