@@ -20,6 +20,14 @@ def learn(lesson_id):
     lesson = data.get(str(lesson_id))
     max_lesson_id = len(data)  # Adapting for dynamic lesson IDs
     return render_template('learn.html', lesson=lesson, max_lesson_id=max_lesson_id)
+    
+@app.route("/quiz")
+def home():
+    return render_template("home.html")
+
+@app.route("/quiz_results")
+def home():
+    return render_template("home.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
