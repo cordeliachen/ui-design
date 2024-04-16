@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+
+    <!-- jquery -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}" />
+
+    <title>Skater Search</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="container">
+        <a class="navbar-brand title txt" href="/home">Skater Search</a>
+        <div class="row">
+          <script
+            type="text/javascript"
+            src="{{ url_for('static', filename = 'search.js') }}"
+          ></script>
+          <form class="d-flex" id="search-form" action="/search" method="post">
+            <input
+              class="form-control"
+              type="search"
+              name="search"
+              id="search-input"
+            />
+            <button class="btn accent white-txt txt" type="submit">
+              Search
+            </button>
+          </form>
+          <a class="btn accent white-txt txt" id="add-btn" href="/add"
+            >+ Add new skater</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">{% block content %} {% endblock %}</div>
+  </body>
+</html>
