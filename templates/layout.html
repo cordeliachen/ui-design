@@ -17,10 +17,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('learn') }}">Learn</a>
+                        <a class="nav-link" href="{{ url_for('learn', lesson_number=1) }}">Learn</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('quiz') }}">Quiz</a>
+                        <a class="nav-link" href="{{ url_for('quiz', question_number=1) }}">Quiz</a>
                     </li>
                 </ul>
             </div>
@@ -37,4 +37,3 @@
 
 </body>
 </html>
-
