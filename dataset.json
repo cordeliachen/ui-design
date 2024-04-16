@@ -1,24 +1,122 @@
-
 {
     "1": {
         "id": 1,
         "title": "Intro",
         "steps": {
+            "description": "Today you will learn the basics you need to get started on the simplest crochet projects. You will need: Yarn, Crochet hook. That’s it!",
+            "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
         }
     },
     "2": {
         "id": 2,
         "title": "Making a slip knot",
-        "steps": {}
+        "steps": {
+            "1": {
+                "description": "Start with the end of the yarn. Pinch a loop with your fingers on your non-hook hand. Drop the long end of the string behind the loop.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "2": {
+                "description": "Take your crochet hook and move it in front of the right side of the circle. Move your hook behind the line in the middle (the long end of the string). Move your hook in front of the left side of the circle.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "3": {
+                "description": "Anchor the knot with the forefinger on your hook hand. Pull on the two dangling strands of yarn.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "4": {
+                "description": "Pull the short end away from you and the long end toward you to tighten the knot.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            }
+        }
     },
     "3": {
         "id": 3,
         "title": "Holding the yarn",
-        "steps": {}
+        "steps": {
+            "1": {
+                "description": "Anchor the slip knot with the forefinger on your hook hand. With your non-hook hand, slide the yarn over and around your little finger. Then wrap the yarn up, over, and behind your forefinger.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "2": {
+                "description": "With your non-hook hand, curl your ring and pinky fingers to secure the loop. Keep your forefinger out to keep the tension in the yarn. Pinch the slip knot with your thumb and middle finger.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            }
+        }
     },
     "4": {
         "id": 4,
         "title": "Starting a chain",
-        "steps": {}
+        "steps": {
+            "1": {
+                "description": "Pinch the slip knot to keep it in place with your thumb and middle finger on your non-hook hand. Sweep your hook under and around the yarn from your forefinger of your non-hook hand.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "2": {
+                "description": "Pull the yarn back toward the slip knot using the crochet hook. Pull your hook through the slip knot.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            }
+        }
+    },
+    "5": {
+        "id": 5,
+        "title": "Single crochet",
+        "steps": {
+            "1": {
+                "description": "Prerequisite: Starting a chain. Sweep your hook under and around the yarn.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "2": {
+                "description": "Pull the yarn through the first two loops on your hook, but leave the third loop. There should now be two loops on your hook.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "3": {
+                "description": "Sweep your hook under and around the yarn again.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "4": {
+                "description": "Pull the yarn through both loops on your hook. There should now be one loop on your hook.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            }
+        }
+    },
+    "6": {
+        "id": 6,
+        "title": "Half double crochet",
+        "steps": {
+            "1": {
+                "description": "Prerequisite: Starting a chain. Sweep your hook under and around the yarn.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "2": {
+                "description": "Insert the hook into both front loops of the next stitch. Sweep your hook under and around the yarn and pull the yarn through the stitch. There should now be three loops on your hook.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "3": {
+                "description": "Sweep your hook under and around the yarn again and pull the yarn through all three loops on your hook. There should now be one loop on your hook.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            }
+        }
+    },
+    "7": {
+        "id": 7,
+        "title": "Double crochet",
+        "steps": {
+            "1": {
+                "description": "Prerequisite: Starting a chain. Sweep your hook under and around the yarn.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "2": {
+                "description": "Insert the hook into both front loops of the next stitch. Sweep your hook under and around the yarn and pull the yarn through the stitch. There should now be three loops on your hook.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "3": {
+                "description": "Sweep your hook under and around the yarn and pull the yarn through the first two loops on your hook. There should now be two loops on your hook.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            },
+            "4": {
+                "description": "Sweep your hook under and around the yarn again and pull the yarn through both loops on your hook. There should now be one loop on your hook.",
+                "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
+            }
+        }
     }
 }
