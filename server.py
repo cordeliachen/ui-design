@@ -4,7 +4,7 @@ import json
 app = Flask(__name__)
 
 # Load your dataset from the correct file
-with open("static/data/dataset.json") as f:
+with open("dataset.json") as f:
     data = json.load(f)
 
 @app.route("/")
