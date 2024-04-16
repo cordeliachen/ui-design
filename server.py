@@ -22,8 +22,11 @@ def home():
 def learn(lesson_id):
     with open('static/data/lessons.json') as f:
         lessons = json.load(f)
-    lesson = lessons.get(str(lesson_id), {})
-    return render_template('learn.html', lesson=lesson)
+    lesson = lessons.get(str(lesson_id))
+    max_lesson_id = len(lessons)  # Adapting for dynamic lesson IDs
+    return render_template('learn.html', lesson=lesson, max_lesson_id=max_lesson_id)
+
+
 
 
 if __name__ == "__main__":
