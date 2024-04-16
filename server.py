@@ -11,12 +11,12 @@ with open("dataset.json") as f:
 
 @app.route("/")
 def start():
-    return render_template("home.html")
+    return render_template("home.html", data=data.values())
 
 
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", data=data.values())
 
 
 @app.route("/learn/<id>")
