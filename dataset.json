@@ -1,1 +1,24 @@
 
+{
+    "1": {
+        "id": 1,
+        "title": "Intro",
+        "steps": {
+        }
+    },
+    "2": {
+        "id": 2,
+        "title": "Making a slip knot",
+        "steps": {}
+    },
+    "3": {
+        "id": 3,
+        "title": "Holding the yarn",
+        "steps": {}
+    },
+    "4": {
+        "id": 4,
+        "title": "Starting a chain",
+        "steps": {}
+    }
+}
