@@ -1,5 +1,35 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %}
 
-<div>{{ lesson.title }}</div>
-
+{% block title %}
+{{ lesson['title'] }}
 {% endblock %}
+
+{% block content %}
+<div class="lesson-content">
+    <h2>{{ lesson['title'] }}</h2>
+    
+    {% for step_id, step in lesson['steps'].items() %}
+        <div class="step">
+            <p>{{ step['description'] }}</p>
+            {% if step['image'] %}
+                <img src="{{ step['image'] }}" alt="Step Image">
+            {% endif %}
+        </div>
+    {% endfor %}
+    
+    <div class="navigation">
+        {% if lesson['id'] > 1 %}
+            <button onclick="window.location.href = '{{ url_for('learn', lesson_id=lesson['id'] - 1) }}'">Previous</button>
+        {% else %}
+            <button onclick="window.location.href = '/'">Go to Home</button>
+        {% endif %}
+        
+        {% if lesson['id'] < max_lesson_id %}
+            <button onclick="window.location.href = '{{ url_for('learn', lesson_id=lesson['id'] + 1) }}'">Next</button>
+        {% else %}
+            <button onclick="window.location.href = '{{ url_for('quiz', question_id=1) }}'">Start Quiz</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
