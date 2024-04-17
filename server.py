@@ -25,11 +25,6 @@ def learn(lesson_id):
     return render_template("learn.html", lesson=lesson, max_lesson_id=max_lesson_id)
 
 
-@app.route("/quiz")
-def quiz():
-    return render_template("home.html", data=data.values())
-
-
 @app.route("/quiz_results")
 def quiz_results():
     return render_template("home.html", data=data.values())
