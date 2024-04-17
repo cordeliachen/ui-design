@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Quiz</h1>
+    <p class="lead text-center">Drag the steps into the correct order</p>
+    
+    <div id="draggable-container" class="d-flex flex-column align-items-center mt-3 gap-3">
+        <button class="btn btn-info draggable" draggable="true" id="step1">Pull the yarn through both loops on your hook</button>
+        <button class="btn btn-info draggable" draggable="true" id="step2">Grab the yarn from your forefinger and pull it through</button>
+        <button class="btn btn-info draggable" draggable="true" id="step3">Insert your hook into the stitch</button>
+        <button class="btn btn-info draggable" draggable="true" id="step4">Bring the yarn over your hook</button>
+    </div>
+    
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8 d-flex justify-content-between align-items-center">
+            <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz3') }}'">Previous</button>
+            <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz5') }}'">Next</button> <!-- Adjust if quiz5 exists -->
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const draggables = document.querySelectorAll('.draggable');
+    const container = document.getElementById('draggable-container');
+
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', () => {
+            draggable.classList.add('dragging');
+        });
+
+        draggable.addEventListener('dragend', () => {
+            draggable.classList.remove('dragging');
+        });
+    });
+
+    container.addEventListener('dragover', e => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(container, e.clientY);
+        const draggable = document.querySelector('.dragging');
+        if (afterElement == null) {
+            container.appendChild(draggable);
+        } else {
+            container.insertBefore(draggable, afterElement);
+        }
+    });
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+});
+</script>
+{% endblock %}
+
