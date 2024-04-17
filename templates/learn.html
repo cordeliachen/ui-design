@@ -5,7 +5,7 @@
 
   {% if lesson['steps'] %} {% for step_id, step in lesson['steps'].items() %}
   <div class="step">
-    <div class="row">
+    <div class="row substep">
       <div class="col-md-4">
         {% for substep in step['description'] %}
         <div class="row">
@@ -15,7 +15,9 @@
       </div>
       <div class="col-md-8">
         {% if step['image'] %}
-        <img src="{{ step['image'] }}" alt="Step Image" />
+        <div class="image-container">
+          <img src="{{ step['image'] }}" alt="Step Image" />
+        </div>
         {% endif %}
       </div>
     </div>

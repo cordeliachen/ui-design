@@ -1,0 +1,16 @@
+.substep {
+  margin-top: 10px;
+}
+.image-container {
+  width: 300px; /* Set the width of the container */
+  height: 225px; /* Set the height of the container */
+  overflow: hidden; /* Hide overflowing content */
+  position: relative; /* Make the container a positioning context */
+}
+
+.image-container img {
+  width: 100%; /* Make the image fill the container horizontally */
+  position: absolute; /* Position the image absolutely within the container */
+  top: 0; /* Align the top of the image with the top of the container */
+  left: 0; /* Align the left of the image with the left of the container */
+}
