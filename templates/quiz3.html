@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Quiz</h1>
+    <p class="lead text-center">What kind of knot is this?</p>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <ul>
+                <li>Insert your hook into the stitch</li>
+                <li>Grab the yarn from your forefinger and pull it through</li>
+                <li>Bring the yarn over your hook</li>
+                <li>Pull it through both loops on your hook</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            <form action="/submit_knot_type" method="post">
+                <div class="form-group mb-2">
+                    <input type="text" name="knotTypeAnswer" class="form-control" placeholder="Enter knot type">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-8 d-flex justify-content-between align-items-center">
+                    <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz2') }}'">Previous</button>
+                    <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz4') }}'">Next</button>
+                </div>
+            </div>
+
+</div>
+{% endblock %}
+

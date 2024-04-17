@@ -156,5 +156,26 @@
                 "description": ["Repeat until the end of your chain.", "Make one chain and turn your project over to start the next row."]
             }
         }
+    },
+
+    "9": {
+    "id": 9,
+    "title": "Order the Steps for Crocheting Technique Y",
+    "steps": {
+        "1": {
+            "image": "https://64.media.tumblr.com/da8ca6aee2f84d7cbf5008195fde761c/tumblr_ml98k4jCsy1so7jgso3_r1_250.gifv"
+        },
+        "2": {
+            "image": "https://64.media.tumblr.com/3f94a46ee525918de72fed221f4689f1/tumblr_ml98k4jCsy1so7jgso5_r1_250.gifv"
+        },
+        "3": {
+            "image": "https://64.media.tumblr.com/66d70eab50bb006fa7dceb131cec76b3/tumblr_ml98k4jCsy1so7jgso4_r1_250.gifv"
+        },
+        "4": {
+            "image": "https://64.media.tumblr.com/5b293f4f50e1f80b4859612f1302ec70/tumblr_ml98k4jCsy1so7jgso2_r1_250.gifv"
+        }
     }
+}
+
+
 }

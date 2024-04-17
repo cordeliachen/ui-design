@@ -1,1 +1,22 @@
-{% extends "layout.html" %} {% block content %} {% endblock %}
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8 text-center">
+        <h1>Quiz</h1>
+        <p class="lead">Answer the following questions:</p>
+        <form action="/quiz_results" method="post">
+            <div class="mb-4">
+                <p>When you start a new crochet row, you skip the first stitch. True or false?</p>
+                <button type="submit" name="question1" value="True" class="btn btn-primary">True</button>
+                <button type="submit" name="question1" value="False" class="btn btn-primary">False</button>
+            </div>
+            <div class="mb-4">
+                <p>What is a difference between crochet and knitting?</p>
+                <button type="submit" name="question2" value="The type of yarn used" class="btn btn-primary">Needles</button>
+                <button type="submit" name="question2" value="The tools used" class="btn btn-primary">Hooks</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
