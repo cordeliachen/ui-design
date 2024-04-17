@@ -1,55 +1,59 @@
-{% extends "layout.html" %} {% block title %} {{ lesson['title'] }} {% endblock
-%} {% block content %}
+{% extends "layout.html" %}
+
+{% block title %}
+{{ lesson['title'] }}
+{% endblock %}
+
+{% block content %}
 <div class="lesson-content">
   <h2>{{ lesson['title'] }}</h2>
 
-  {% if lesson['steps'] %} {% for step_id, step in lesson['steps'].items() %}
-  <div class="step">
-    <div class="row substep">
-      <div class="col-md-4">
-        {% for substep in step['description'] %}
-        <div class="row">
-          <p>{{ substep }}</p>
+  {% if lesson['steps'] %}
+    {% for step_id, step in lesson['steps'].items() %}
+      <div class="step">
+        <div class="row substep">
+          <div class="col-md-4">
+            {% for substep in step['description'] %}
+              <div class="row">
+                <p>{{ substep }}</p>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="col-md-8">
+            {% if step['image'] %}
+              <div class="image-container">
+                <img src="{{ step['image'] }}" alt="Step Image" />
+              </div>
+            {% endif %}
+          </div>
         </div>
-        {% endfor %}
       </div>
-      <div class="col-md-8">
-        {% if step['image'] %}
-        <div class="image-container">
-          <img src="{{ step['image'] }}" alt="Step Image" />
-        </div>
-        {% endif %}
-      </div>
-    </div>
-  </div>
-  {% endfor %} {% else %}
-  <p>{{ lesson['steps']['description'] }}</p>
-  {% if lesson['steps']['image'] %}
-  <img src="{{ lesson['steps']['image'] }}" alt="Step Image" />
-  {% endif %} {% endif %}
+    {% endfor %}
+  {% else %}
+    <p>This lesson does not have any steps.</p>
+  {% endif %}
 
   <div class="navigation">
     {% if lesson['id'] > 1 %}
-    <button
-      onclick="window.location.href = '{{ url_for('learn', lesson_id=lesson['id'] - 1) }}'"
-    >
-      Previous
-    </button>
+      <button onclick="window.location.href = '{{ url_for('learn', lesson_id=lesson['id'] - 1) }}'">
+        Previous
+      </button>
     {% else %}
-    <button onclick="window.location.href = '/'">Go to Home</button>
-    {% endif %} {% if lesson['id'] < max_lesson_id %}
-    <button
-      onclick="window.location.href = '{{ url_for('learn', lesson_id=lesson['id'] + 1) }}'"
-    >
-      Next
-    </button>
+      <button onclick="window.location.href = '/'">
+        Go to Home
+      </button>
+    {% endif %}
+    {% if lesson['id'] < max_lesson_id %}
+      <button onclick="window.location.href = '{{ url_for('learn', lesson_id=lesson['id'] + 1) }}'">
+        Next
+      </button>
     {% else %}
-    <button
-      onclick="window.location.href = '{{ url_for('quiz', question_id=1) }}'"
-    >
-      Start Quiz
-    </button>
+      <button onclick="window.location.href = '{{ url_for('quiz1') }}'">
+        Start Quiz
+      </button>
     {% endif %}
   </div>
 </div>
 {% endblock %}
+
+

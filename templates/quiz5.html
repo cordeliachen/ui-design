@@ -1,0 +1,75 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Quiz</h1>
+    <p class="lead text-center">Drag the GIFs into the correct order</p>
+    
+    <div id="draggable-container" class="d-flex flex-row align-items-center justify-content-center mt-3 gap-3" style="overflow-x: auto; white-space: nowrap;">
+        {% for step in steps %}
+        <img src="{{ step.image }}" class="draggable" draggable="true" id="step{{ loop.index }}" alt="Step {{ loop.index }}" style="max-width: 100%; height: auto;">
+        {% endfor %}
+    </div>
+
+        <!-- New Question Section -->
+    <div class="mt-5 text-center">
+        <h2>What kind of knot is this?</h2>
+        <div class="d-flex justify-content-center gap-2 mt-3">
+            <button class="btn btn-primary sm-button">Slip Knot</button>
+            <button class="btn btn-primary sm-button">Single Crochet</button>
+            <button class="btn btn-primary sm-button">Half Double Crochet</button>
+            <button class="btn btn-primary sm-button">Double Crochet</button>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8 d-flex justify-content-between align-items-center">
+            <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz4') }}'">Previous</button>
+            <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz6') }}'">Next</button> <!-- Adjust as needed -->
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const draggables = document.querySelectorAll('.draggable');
+    const container = document.getElementById('draggable-container');
+
+    draggables.forEach(draggable => {
+        draggable.addEventListener('dragstart', function(e) {
+            e.dataTransfer.setData('text/plain', draggable.id);
+            draggable.classList.add('dragging');
+        });
+
+        draggable.addEventListener('dragend', function(e) {
+            draggable.classList.remove('dragging');
+        });
+
+        container.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(container, e.clientX);
+            const dragging = document.querySelector('.dragging');
+            if (afterElement == null) {
+                container.appendChild(dragging);
+            } else {
+                container.insertBefore(dragging, afterElement);
+            }
+        });
+    });
+
+    function getDragAfterElement(container, x) {
+        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = x - box.left - box.width / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+});
+</script>
+{% endblock %}
+

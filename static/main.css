@@ -14,3 +14,123 @@
   top: 0; /* Align the top of the image with the top of the container */
   left: 0; /* Align the left of the image with the left of the container */
 }
+
+/* Additional CSS for alignment and spacing */
+.text-left {
+    text-align: left; /* Aligns the text to the left */
+}
+
+.d-flex {
+    display: flex; /* Uses flexbox for layout */
+    flex-direction: column; /* Stacks children vertically */
+}
+
+.align-items-end {
+    align-items: flex-end; /* Aligns children to the right (end of the flex container) */
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem; /* Adds a small margin below each button */
+}
+
+.btn-primary {
+    width: auto; /* Adjusts the width of buttons to fit their content */
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+.small-button {
+    padding: 5px 10px;  /* Reduces the padding inside the buttons making them smaller */
+    margin: 0 10px;     /* Adds horizontal space between the buttons */
+    font-size: 0.8rem;  /* Smaller font size for the text inside the buttons */
+}
+
+#draggable-container {
+    width: 100%; /* Ensures the container uses full width for better drag experience */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Adds space between buttons */
+}
+
+.draggable {
+    cursor: grab; /* Indicates that an item is draggable */
+    user-select: none; /* Prevents the text within the draggable from being selectable */
+}
+
+.draggable.dragging {
+    opacity: 0.5; /* Makes the draggable semi-transparent while dragging */
+    cursor: grabbing;
+}
+
+#draggable-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    padding: 20px;
+    overflow-x: auto; /* Allows horizontal scrolling */
+    white-space: nowrap; /* Keeps elements in a single line */
+}
+
+.draggable {
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.2s ease-in-out;
+    max-width: 150px; /* Limits GIF width */
+    height: auto; /* Maintains aspect ratio */
+    border: 2px solid transparent; /* Styling for image border */
+}
+
+.draggable:hover {
+    border-color: #007bff; /* Blue border on hover */
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+    border-color: #ff0000; /* Red border when dragging */
+}
+
+.sm-button {
+    padding: 5px 10px;  /* Reduced padding makes the button physically smaller */
+    font-size: 14px;  /* Smaller font size for the text inside the buttons */
+    border-radius: 4px;  /* Rounded borders for aesthetics */
+    margin: 0 15px;  /* Increased horizontal margin for more spacing */
+    transition: background-color 0.3s ease;  /* Smooth transition for hover effects */
+}
+
+.sm-button:hover {
+    background-color: #0056b3;  /* Darker shade on hover for better UI interaction */
+}
+
+
