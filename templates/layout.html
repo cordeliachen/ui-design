@@ -4,35 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>How to Crochet</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
+  </head>
+  <body class="bg">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/">How to Crochet</a>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Learn
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    {% for lesson in data %}
-                    <li><a class="dropdown-item" href="/learn/{{ lesson['id'] }}">{{ lesson.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
+      <div class="container">
+        <a class="navbar-brand txt" href="/">How to Crochet</a>
+        <div class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle txt"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Learn
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for lesson in data %}
+            <li>
+              <a class="dropdown-item txt" href="/learn/{{ lesson['id'] }}"
+                >{{ lesson.title }}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
         </div>
+        <a class="navbar-brand txt" href="/quiz">Quiz</a>
+      </div>
     </nav>
 
     <div class="container mt-4">
-        <div style="position: fixed; top: 50px; right: 10px;">
-          {% if session.get('score') is not none %}
-          Score: {{ session.get('score', 0) }}
-          {% endif %}
-        </div>
-        <main>
-            {% block content %}{% endblock %}
-        </main>
+      <div style="position: fixed; top: 50px; right: 10px">
+        {% if session.get('score') is not none %} Score: {{ session.get('score',
+        0) }} {% endif %}
+      </div>
+      <main>{% block content %}{% endblock %}</main>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
