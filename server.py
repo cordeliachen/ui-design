@@ -5,11 +5,12 @@ import json
 app = Flask(__name__)
 
 # Secret key for signing the session
-app.config["SECRET_KEY"] = "your_secret_key_here"
+
+app.config['SECRET_KEY'] = 'your_secret_key_here'
 
 # Session configuration
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_TYPE'] = 'filesystem'
 
 # Initialize the session
 Session(app)
@@ -18,16 +19,13 @@ Session(app)
 with open("dataset.json") as f:
     data = json.load(f)
 
-
 @app.route("/")
 def start():
     return render_template("home.html", data=data.values())
 
-
 @app.route("/home")
 def home():
     return render_template("home.html", data=data.values())
-
 
 @app.route("/learn/<int:lesson_id>")
 def learn(lesson_id):
@@ -42,11 +40,9 @@ def learn(lesson_id):
         "learn.html", lesson=lesson, max_lesson_id=max_lesson_id, data=data.values()
     )
 
-
 @app.route("/quiz")
 def quiz():
     return render_template("quiz.html", data=data.values())
-
 
 @app.route("/quiz1")
 def quiz1():
@@ -120,6 +116,6 @@ def feedback():
     session.pop("score", None)  # Optionally reset the score
     return render_template("feedback.html", score=score)
 
-
 if __name__ == "__main__":
     app.run(debug=True)
+
