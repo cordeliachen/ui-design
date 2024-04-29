@@ -170,3 +170,37 @@
   background-color: #0056b3; /* Darker shade on hover for better UI interaction */
 }
 
+.incorrect {
+  background-color: #dc3545; /* Red background for incorrect matches */
+  border-color: #dc3545; /* Red border for incorrect matches */
+  color: white; /* White text color for visibility */
+}
+
+.crochet-hero-section {
+  margin-top: 250px !important; /* Ensures the top margin is prioritized */
+  font-size: 70px !important; /* Ensures the font size is prioritized */
+}
+
+.crochet-navigation {
+  margin-top: 40px !important; /* Increased padding above navigation, ensuring it's prioritized */
+}
+
+.crochet-btn {
+  padding: 15px 30px !important; /* More padding for larger buttons, ensuring it's prioritized */
+  font-size: 20px !important; /* Larger text on buttons for better readability, ensuring it's prioritized */
+  margin-right: 20px !important; /* Adds space between the buttons, ensuring it's prioritized */
+  border-radius: 8px !important; /* More rounded corners for aesthetic, ensuring it's prioritized */
+}
+
+.crochet-btn:last-child {
+  margin-right: 0 !important; /* Removes right margin on the last button, ensuring it's prioritized */
+}
+
+.crochet-hero-section h1 {
+  font-size: 70px !important; /* Large font size for visibility */
+  line-height: 56px !important; /* Adjust line height for better readability */
+
+}
+
+
+

@@ -50,25 +50,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     zone.addEventListener('drop', function(e) {
       e.preventDefault();
+      // Remove previous classes for reset
+      zone.classList.remove('matched', 'incorrect');
+
       const knotType = e.dataTransfer.getData('text');
-      const matched = knotType === e.target.getAttribute('data-knot');
+      const matched = knotType === zone.getAttribute('data-knot');
 
       if (matched) {
-        e.target.classList.add('matched');
-      }
-
-      const matchedZones = Array.from(dropZones).filter(zone => zone.classList.contains('matched'));
-
-      if (matchedZones.length === dropZones.length) {
-        alert('All matches are correct!');
-      } else if (matched) {
-        alert('Matched correctly!');
+        zone.classList.add('matched');
+        // Send a POST request to update the score
+        fetch('/update_score_6', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ correct: true })
+        });
       } else {
-        alert('Wrong match. Try again!');
+        zone.classList.add('incorrect');
       }
     });
   });
 });
+
+
 </script>
 <style>
     .drop-zone {
@@ -96,6 +101,13 @@ document.addEventListener('DOMContentLoaded', function () {
         border-color: #28a745; /* Green border for matched items */
         color: white; /* White text color for matched items */
     }
+
+    .incorrect {
+        background-color: #dc3545; /* Red background for incorrect matches */
+        border-color: #dc3545; /* Red border for incorrect matches */
+        color: white; /* White text color for visibility */
+    }
+
     @keyframes pulse {
         0% { transform: scale(1); }
         50% { transform: scale(1.05); }
