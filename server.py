@@ -45,7 +45,7 @@ def learn(lesson_id):
 
 @app.route("/quiz")
 def quiz():
-    return render_template("quiz.html", data=data.values())
+    return render_template("quiz1.html", data=data.values())
 
 
 @app.route("/quiz1")
@@ -112,6 +112,15 @@ def submit_quiz(quiz_id):
     score = session.get("score", 0)
     score += increment
     session["score"] = score
+
+@app.route("/update_score_6", methods=["POST"])
+def update_score_6():
+    if request.json and request.json['correct']:
+        score = session.get("score", 0)
+        score += 1
+        session["score"] = score
+    return '', 204
+
 
 
 @app.route("/feedback")
