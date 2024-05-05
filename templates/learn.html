@@ -1,34 +1,61 @@
-{% extends "layout.html" %}
-
-{% block title %}{{ lesson['title'] }}{% endblock %}
-
+{% extends "layout.html" %} {% block title %}{{ lesson['title'] }}{% endblock %}
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center mb-4">{{ lesson['title'] }}</h1>
+  <h1 class="text-center mb-4">{{ lesson['title'] }}</h1>
 
-    {% if lesson['steps'] %}
-        <div class="row justify-content-center">
-            {% for step_id, step in lesson['steps'].items() %}
-            <div class="col-md-4 mb-4 d-flex">
-                <div class="card h-100 w-100">
-                    <div class="lesson-step-number">Step {{ loop.index }}</div>
-                    {% if step['image'] %}
-                    <img src="{{ step['image'] }}" width="{{ step.get('imgWidth', '300') }}" height="{{ step.get('imgHeight', '225') }}" class="lesson-step-image" alt="Step Image">
-
-                    {% endif %}
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            {% for substep in step['description'] %}
-                            <li>{{ substep }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+  {% if lesson['steps'] %}
+  <div class="row justify-content-center">
+    {% for step_id, step in lesson['steps'].items() %}
+    <div class="col-md-4 mb-4 d-flex">
+      <div class="card h-100 w-100">
+        <div class="lesson-step-number">Step {{ loop.index }}</div>
+        {% if step['image'] %}
+        <div class="image-container">
+          <img
+            src="{{ step['image'] }}"
+            width="{{ step.get('imgWidth', '300') }}"
+            height="{{ step.get('imgHeight', '225') }}"
+            class="lesson-step-image"
+            alt="Step Image"
+          />
         </div>
+        {% endif %}
+        <div class="card-body">
+          <ul class="list-unstyled">
+            {% for substep in step['description'] %}
+            <li>{{ substep }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-center">This lesson does not have any steps.</p>
+  {% endif %}
+
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    {% if lesson['id'] > 1 %}
+    <a
+      href="{{ url_for('learn', lesson_id=lesson['id'] - 1) }}"
+      class="btn quiz-btn-secondary"
+      >Previous</a
+    >
+    <div class="space-mt"></div>
     {% else %}
-        <p class="text-center">This lesson does not have any steps.</p>
+    <a href="/" class="btn quiz-btn-secondary">To Home</a>
+    <div class="space-mt"></div>
+    {% endif %} {% if lesson['id'] < max_lesson_id %}
+    <a
+      href="{{ url_for('learn', lesson_id=lesson['id'] + 1) }}"
+      class="btn quiz-btn-primary"
+      >Next</a
+    >
+    <div class="space-mt"></div>
+    {% else %}
+    <a href="{{ url_for('quiz1') }}" class="btn quiz-success">Start Quiz</a>
+    <div class="space-mt"></div>
     {% endif %}
 
     <div class="d-flex justify-content-between align-items-center mt-4">
@@ -50,10 +77,3 @@
     </div>
 </div>
 {% endblock %}
-
-
-
-
-
-
-

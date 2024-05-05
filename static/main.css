@@ -3,7 +3,7 @@
 }
 
 .accent {
-  background-color: #4B0082;
+  background-color: #4b0082;
 }
 
 .txt {
@@ -35,8 +35,8 @@
   margin-top: 10px;
 }
 .image-container {
-  width: 300px; /* Set the width of the container */
-  height: 225px; /* Set the height of the container */
+  width: 100%; /* Set the width of the container */
+  height: 250px; /* Set the height of the container */
   overflow: hidden; /* Hide overflowing content */
   position: relative; /* Make the container a positioning context */
 }
@@ -125,30 +125,30 @@
 }
 
 .draggable-t {
-    background-color: #6c757d; /* Bootstrap default grey */
-    color: white; /* White text for better visibility */
-    border: none; /* Remove border for a cleaner look */
-    padding: 10px 15px; /* Adjust padding to fit content */
-    width: auto; /* Ensure width fits the text */
-    min-width: 200px; /* Minimum width for consistency */
-    text-align: center; /* Center text within the button */
-    margin-bottom: 10px; /* Space between buttons */
-    cursor: pointer; /* Indicate that the element is draggable */
-    border-radius: 5px; /* Soften the corners of the buttons */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions for interactions */
+  background-color: #6c757d; /* Bootstrap default grey */
+  color: white; /* White text for better visibility */
+  border: none; /* Remove border for a cleaner look */
+  padding: 10px 15px; /* Adjust padding to fit content */
+  width: auto; /* Ensure width fits the text */
+  min-width: 200px; /* Minimum width for consistency */
+  text-align: center; /* Center text within the button */
+  margin-bottom: 10px; /* Space between buttons */
+  cursor: pointer; /* Indicate that the element is draggable */
+  border-radius: 5px; /* Soften the corners of the buttons */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions for interactions */
 }
 
 .draggable:hover {
-    background-color: #5a6268; /* Slightly darker grey on hover */
+  background-color: #5a6268; /* Slightly darker grey on hover */
 }
 
 #draggable-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%; /* Ensure the container uses full width */
-    gap: 10px; /* Consistent spacing between draggable elements */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ensure the container uses full width */
+  gap: 10px; /* Consistent spacing between draggable elements */
 }
 
 
@@ -199,117 +199,113 @@
 .crochet-hero-section h1 {
   font-size: 70px !important; /* Large font size for visibility */
   line-height: 56px !important; /* Adjust line height for better readability */
-
 }
 
 .lesson-step-number {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-    padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-weight: bold;
-    z-index: 10;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  z-index: 10;
 }
 .lesson-step-image {
-    width: auto; /* Ensures width is determined by HTML attribute */
-    height: auto; /* Ensures height is determined by HTML attribute */
-    object-fit: cover;
+  width: auto; /* Ensures width is determined by HTML attribute */
+  height: auto; /* Ensures height is determined by HTML attribute */
+  object-fit: cover;
 }
 
 .quiz-container {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .quiz-question {
-    font-weight: bold;
-    font-size: 18px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .quiz-option-input {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .quiz-option-label {
-    margin-left: 0.5rem;
-    font-size: 16px;
+  margin-left: 0.5rem;
+  font-size: 16px;
 }
 
 /* Style for the Next button (dark purple) */
 .quiz-btn-primary {
-    background-color: #4B0082; /* Dark purple, indigo shade */
-    color: white; /* White text for contrast */
-    border: none;
-    padding: 10px 300px;
-    border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+  background-color: #4b0082; /* Dark purple, indigo shade */
+  color: white; /* White text for contrast */
+  border: none;
+  padding: 10px 300px;
+  border-radius: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .quiz-btn-primary:hover {
-    background-color: #3A0066; /* A slightly darker purple on hover */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #3a0066; /* A slightly darker purple on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Style for the Home button (light purple) */
 .quiz-btn-secondary {
-    background-color: #D8BFD8; /* Light purple, thistle shade */
-    color: #343a40; /* Dark grey text for contrast */
-    border: none;
-    padding: 10px 285px;
-    border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+  background-color: #d8bfd8; /* Light purple, thistle shade */
+  color: #343a40; /* Dark grey text for contrast */
+  border: none;
+  padding: 10px 285px;
+  border-radius: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .quiz-btn-secondary:hover {
-    background-color: #C7AFC7; /* A slightly darker shade of light purple on hover */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #c7afc7; /* A slightly darker shade of light purple on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-
 .space-mt {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .space-top {
-    padding-bottom: 30px;
+  padding-bottom: 30px;
 }
 
 .space-side {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
-
-
 .quiz-form-padding {
-    padding: 20px;
+  padding: 20px;
 }
 
 .answer-button {
-    background-color: #6c757d; /* Bootstrap's default grey */
-    color: white; /* White text for better visibility */
-    border: none; /* No border for a cleaner look */
-    width: 100%; /* Make all buttons the same width */
-    padding: 10px 0; /* Uniform padding for all buttons */
-    margin-bottom: 10px; /* Consistent spacing between buttons */
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  background-color: #6c757d; /* Bootstrap's default grey */
+  color: white; /* White text for better visibility */
+  border: none; /* No border for a cleaner look */
+  width: 100%; /* Make all buttons the same width */
+  padding: 10px 0; /* Uniform padding for all buttons */
+  margin-bottom: 10px; /* Consistent spacing between buttons */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
 .answer-button:hover {
-    background-color: #5a6268; /* Slightly darker grey on hover */
+  background-color: #5a6268; /* Slightly darker grey on hover */
 }
 
 .btn-grey {
-    background-color: #6c757d; /* Bootstrap’s default grey */
-    color: white; /* White text for contrast */
-    border: none; /* Optional: removes the border for a cleaner look */
+  background-color: #6c757d; /* Bootstrap’s default grey */
+  color: white; /* White text for contrast */
+  border: none; /* Optional: removes the border for a cleaner look */
 }
 
 .btn-grey:hover {
-    background-color: #5a6268; /* Darker grey on hover for better interaction */
+  background-color: #5a6268; /* Darker grey on hover for better interaction */
 }
 
 #draggable-container {
@@ -337,50 +333,44 @@
 }
 
 .knot-quiz-answer-btn {
-    padding: 10px 12px; /* Sufficient horizontal padding */
-    max-width: 180px; /* Max width to prevent buttons from stretching too wide */
-    white-space: nowrap; /* Prevents text from wrapping inside the button */
-    overflow: hidden; /* Hides any overflow text that doesn't fit */
-    text-overflow: ellipsis; /* Adds an ellipsis if text overflows */
-    display: inline-block; /* Ensure buttons are treated as inline-block elements */
-    background-color: #6c757d; /* Bootstrap default grey */
-    color: white; /* White text for better visibility */
-    border: none; /* No border for a cleaner look */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-    margin-bottom: 10px; /* Consistent bottom margin for spacing */
-    width: 100%; /* Ensures full width within the container to align centrally */
+  padding: 10px 12px; /* Sufficient horizontal padding */
+  max-width: 180px; /* Max width to prevent buttons from stretching too wide */
+  white-space: nowrap; /* Prevents text from wrapping inside the button */
+  overflow: hidden; /* Hides any overflow text that doesn't fit */
+  text-overflow: ellipsis; /* Adds an ellipsis if text overflows */
+  display: inline-block; /* Ensure buttons are treated as inline-block elements */
+  background-color: #6c757d; /* Bootstrap default grey */
+  color: white; /* White text for better visibility */
+  border: none; /* No border for a cleaner look */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  margin-bottom: 10px; /* Consistent bottom margin for spacing */
+  width: 100%; /* Ensures full width within the container to align centrally */
 }
 
 .knot-quiz-answer-btn:hover {
-    background-color: #5a6268; /* Slightly darker grey on hover */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect for depth on hover */
+  background-color: #5a6268; /* Slightly darker grey on hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect for depth on hover */
 }
 
 /* Container to ensure buttons are centered correctly */
 .centered-flex {
-    display: flex;
-    justify-content: center; /* Centers children horizontally */
-    align-items: center; /* Aligns children vertically for extra measure */
-    flex-wrap: wrap; /* Allows items to wrap as needed */
-    gap: 10px; /* Provides space between buttons */
+  display: flex;
+  justify-content: center; /* Centers children horizontally */
+  align-items: center; /* Aligns children vertically for extra measure */
+  flex-wrap: wrap; /* Allows items to wrap as needed */
+  gap: 10px; /* Provides space between buttons */
 }
 
 .text-center {
-    text-align: center; /* Ensures text is centered, verify this is applied to your h2 element */
+  text-align: center; /* Ensures text is centered, verify this is applied to your h2 element */
 }
 
 .quiz-success {
-    background-color: #4B0082; /* Dark purple, indigo shade */
-    color: white; /* White text for contrast */
-    border: none;
-    padding: 10px 280px;
-    border-radius: 5px;
-    transition: background-color 0.3s, box-shadow 0.3s;
+  background-color: #4b0082; /* Dark purple, indigo shade */
+  color: white; /* White text for contrast */
+  border: none;
+  padding: 10px 280px;
+  border-radius: 5px;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
-
-
-
-
-
-

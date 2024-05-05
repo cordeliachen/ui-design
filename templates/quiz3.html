@@ -1,40 +1,119 @@
-{% extends "layout.html" %}
-
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">What kind of knot is this?</h1>
-    <div class="space-top"></div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center mb-4">Answer the following questions (2/6)</h1>
 
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <ul>
-                <li>Sweep the yarn over your hook</li>
-                <li>Insert your hook into the stitch, grab the yarn, and bring it through</li>
-                <li>Sweep the yarn over, and pull it through the first two loops on your hook only</li>
-                <li>Sweep the yarn over again, and pull it through the two loops on your hook</li>
-            </ul>
+      <form
+        id="quizForm3"
+        action="{{ url_for('submit_quiz', quiz_id=3) }}"
+        method="post"
+        class="quiz-container quiz-form-padding"
+      >
+        <div class="mb-4">
+          <p class="quiz-question">What kind of knot is this?</p>
+          <ul>
+            {% for step_num, step_data in steps.items() %} {% if not loop.last
+            %}
+            <li>
+              {% for substep in step_data['description'] %} {{ substep }} {%
+              endfor %}
+            </li>
+            {% endif %} {% endfor %}
+          </ul>
+          <div class="form-check">
+            <input
+              class="form-check-input quiz-option-input"
+              type="radio"
+              name="question1"
+              id="slip"
+              value="Slip knot"
+            />
+            <label class="form-check-label quiz-option-label" for="slip">
+              Slip knot
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input quiz-option-input"
+              type="radio"
+              name="question1"
+              id="single"
+              value="Single crochet"
+            />
+            <label class="form-check-label quiz-option-label" for="single">
+              Single crochet
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input quiz-option-input"
+              type="radio"
+              name="question1"
+              id="half"
+              value="Half double crochet"
+            />
+            <label class="form-check-label quiz-option-label" for="half">
+              Half double crochet
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input quiz-option-input"
+              type="radio"
+              name="question1"
+              id="double"
+              value="Double crochet"
+            />
+            <label class="form-check-label quiz-option-label" for="double">
+              Double crochet
+            </label>
+          </div>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-4 text-center">
-            <form action="/submit_knot_type" method="post">
-                <div class="form-group mb-2">
-                    <input type="text" name="knotTypeAnswer" class="form-control" placeholder="Enter knot type">
-                </div>
-                <button type="submit" class="btn btn-grey">Submit</button>  <!-- Updated class here -->
-            </form>
-        </div>
-    </div>
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-8 d-flex justify-content-between align-items-center">
-            <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz2') }}'">Previous</button>
-            <div class="space-mt"></div>
-            <button class="btn quiz-btn-primary" onclick="location.href='{{ url_for('quiz4') }}'">Next</button>
-        </div>
-    </div>
+        <div class="d-flex justify-content-between">
+          <a href="{{ url_for('home') }}" class="btn quiz-btn-secondary"
+            >Home</a
+          >
 
+          <div class="space-mt"></div>
+
+          <button type="submit" class="btn quiz-btn-primary">Next</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div
+    id="messageBox"
+    class="alert"
+    style="position: fixed; bottom: 20px; right: 20px; display: none"
+  ></div>
 </div>
+
+<script>
+  document.getElementById("quizForm3").onsubmit = function (event) {
+    event.preventDefault();
+    var form = this;
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        var messageBox = document.getElementById("messageBox");
+        if (data.correct) {
+          messageBox.className = "alert alert-success";
+          messageBox.textContent = "Correct! Redirecting...";
+          messageBox.style.display = "block";
+          setTimeout(() => (window.location.href = data.next_url), 2000);
+        } else {
+          messageBox.className = "alert alert-danger";
+          messageBox.textContent = "Incorrect, try again!";
+          messageBox.style.display = "block";
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+</script>
 {% endblock %}
-
-
-<!-- answer is Double crochet -->
