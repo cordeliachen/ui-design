@@ -14,6 +14,7 @@
                     <div class="lesson-step-number">Step {{ loop.index }}</div>
                     {% if step['image'] %}
                     <img src="{{ step['image'] }}" width="{{ step.get('imgWidth', '300') }}" height="{{ step.get('imgHeight', '225') }}" class="lesson-step-image" alt="Step Image">
+
                     {% endif %}
                     <div class="card-body">
                         <ul class="list-unstyled">

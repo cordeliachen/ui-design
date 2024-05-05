@@ -96,22 +96,23 @@ def submit_quiz(quiz_id):
     score = session.get("score", 0)
     quiz_answers = correct_answers.get(quiz_id, {})
 
+    correct = True
     for key, correct_answer in quiz_answers.items():
-        if request.form.get(key) == correct_answer:
-            score += 1
+        if request.form.get(key) != correct_answer:
+            correct = False
+            break
 
-    session["score"] = score
+    if correct:
+        score += len(quiz_answers)  # Increment score by the number of correct answers
+        session["score"] = score
 
-    # Redirect to the next quiz, or to the feedback page if it's the last quiz
-    if quiz_id < total_quizzes:
-        return redirect(url_for(f"quiz{quiz_id + 1}"))
-    else:
-        return redirect(url_for("feedback"))
+    response = {
+        "correct": correct,
+        "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id < total_quizzes else url_for("feedback")
+    }
+    return json.dumps(response), 200 if correct else 400
 
-    increment = request.get_json().get("increment", 0)
-    score = session.get("score", 0)
-    score += increment
-    session["score"] = score
+
 
 @app.route("/update_score_6", methods=["POST"])
 def update_score_6():
