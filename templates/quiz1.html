@@ -1,45 +1,54 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="row justify-content-center mt-5">
-    <div class="col-md-8 text-center">
-        <h1>Quiz</h1>
-        <p class="lead">Answer the following question:</p>
-        <form id="quizForm" action="/submit_quiz/1" method="post">
-            <div class="mb-4">
-                <p>When you start a new crochet row, you skip the first stitch. True or False?</p>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question1" id="trueOption" value="True">
-                    <label class="form-check-label" for="trueOption">
-                        True
-                    </label>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="text-center mb-4">Answer the following questions</h1>
+            
+            <form id="quizForm" action="{{ url_for('submit_quiz', quiz_id=1) }}" method="post" class="quiz-container quiz-form-padding">
+                <div class="mb-4">
+                    <p class="quiz-question">When you start a new crochet row, do you skip the first stitch?</p>
+                    <div class="form-check">
+                        <input class="form-check-input quiz-option-input" type="radio" name="question1" id="trueOption" value="True">
+                        <label class="form-check-label quiz-option-label" for="trueOption">
+                            True
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input quiz-option-input" type="radio" name="question1" id="falseOption" value="False">
+                        <label class="form-check-label quiz-option-label" for="falseOption">
+                            False
+                        </label>
+                    </div>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question1" id="falseOption" value="False">
-                    <label class="form-check-label" for="falseOption">
-                        False
-                    </label>
+                <div class="mb-4">
+                    <p class="quiz-question">What mainly distinguishes crochet from knitting?</p>
+                    <div class="form-check">
+                        <input class="form-check-input quiz-option-input" type="radio" name="question2" id="yarnOption" value="The type of yarn used">
+                        <label class="form-check-label quiz-option-label" for="yarnOption">
+                            The type of yarn used
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input quiz-option-input" type="radio" name="question2" id="toolsOption" value="The tools used">
+                        <label class="form-check-label quiz-option-label" for="toolsOption">
+                            The tools used
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="mb-4">
-                <p>What is the difference between crochet and knitting?</p>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question2" id="yarnOption" value="The type of yarn used">
-                    <label class="form-check-label" for="yarnOption">
-                        The type of yarn used
-                    </label>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ url_for('home') }}" class="btn quiz-btn-secondary">Home</a>
+
+                    <div class="space-mt"></div>
+                    
+                    <button type="submit" class="btn quiz-btn-primary">Next</button>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="question2" id="toolsOption" value="The tools used">
-                    <label class="form-check-label" for="toolsOption">
-                        The tools used
-                    </label>
-                </div>
-            </div>
-            <button type="button" class="btn btn-secondary" onclick="document.getElementById('quizForm').submit();">Next</button>
-        </form>
-        <a href="{{ url_for('home') }}" class="btn btn-secondary">Home</a>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
+
+
 
