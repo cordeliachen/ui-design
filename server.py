@@ -55,7 +55,10 @@ def quiz1():
 
 @app.route("/quiz2")
 def quiz2():
-    return render_template("quiz2.html", data=data.values())
+    print(data.get("6")["steps"])
+    return render_template(
+        "quiz2.html", data=data.values(), steps=data.get("6")["steps"]
+    )
 
 
 @app.route("/quiz3")
@@ -88,7 +91,7 @@ def quiz6():
 def submit_quiz(quiz_id):
     correct_answers = {
         1: {"question1": "False", "question2": "The tools used"},
-        2: {"question1": "True", "question2": "The type of yarn used"},
+        2: {"question1": "Single crochet"},
         3: {"question1": "True", "question2": "The tools used"},
         4: {"question1": "False", "question2": "The type of yarn used"},
     }
@@ -108,20 +111,22 @@ def submit_quiz(quiz_id):
 
     response = {
         "correct": correct,
-        "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id < total_quizzes else url_for("feedback")
+        "next_url": (
+            url_for(f"quiz{quiz_id + 1}")
+            if quiz_id < total_quizzes
+            else url_for("feedback")
+        ),
     }
     return json.dumps(response), 200 if correct else 400
 
 
-
 @app.route("/update_score_6", methods=["POST"])
 def update_score_6():
-    if request.json and request.json['correct']:
+    if request.json and request.json["correct"]:
         score = session.get("score", 0)
         score += 1
         session["score"] = score
-    return '', 204
-
+    return "", 204
 
 
 @app.route("/feedback")
