@@ -17,17 +17,21 @@
     <div class="d-flex justify-content-center mt-4">
         <div id="knot-types" class="d-flex flex-row align-items-center justify-content-center gap-3">
             <div class="drop-zone" data-knot="single-crochet">Single Crochet</div>
+            <div class="space-side"></div>
             <div class="drop-zone" data-knot="half-double">Half-Double Crochet</div>
+            <div class="space-side"></div>
             <div class="drop-zone" data-knot="double-crochet">Double Crochet</div>
         </div>
     </div>
 
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-8 d-flex justify-content-between">
-            <button class="btn btn-secondary" onclick="location.href='{{ url_for('quiz5') }}'">Previous</button>
-            <button class="btn btn-secondary" onclick="location.href='{{ url_for('feedback') }}'">Finish</button>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 d-flex justify-content-between align-items-center">
+            <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz5') }}'">Previous</button>
+            <div class="space-mt"></div>
+            <button class="btn quiz-btn-primary" onclick="location.href='{{ url_for('feedback') }}'">Finish</button>
         </div>
     </div>
+
 </div>
 
 
@@ -85,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         align-items: center;
         justify-content: center;
         font-size: 20px; /* Larger font size for readability */
-        border: 2px dashed #007bff;
+        border: 2px dashed #4B0082;
         border-radius: 4px;
         transition: background-color 0.3s, border-color 0.3s;
     }
@@ -115,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 </style>
 {% endblock %}
+
 
 
 
