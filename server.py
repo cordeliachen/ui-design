@@ -103,6 +103,10 @@ def submit_quiz(quiz_id):
     correct = True
     for key, correct_answer in quiz_answers.items():
         if request.form.get(key) != correct_answer:
+            if quiz_id == 3:
+                ans = request.form.get(key).lower()
+                if ans == "double crochet" or ans == "double":
+                    continue
             correct = False
             break
 

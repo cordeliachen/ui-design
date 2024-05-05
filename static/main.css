@@ -48,6 +48,10 @@
   left: 0; /* Align the left of the image with the left of the container */
 }
 
+.learn-padding {
+  height: 30px;
+}
+
 .navigation {
   margin: 20px;
 }
@@ -118,7 +122,6 @@
   gap: 20px; /* Adds space between buttons */
 }
 
-
 .draggable-t.dragging {
   opacity: 0.5; /* Makes the draggable semi-transparent while dragging */
   cursor: grabbing;
@@ -150,7 +153,6 @@
   width: 100%; /* Ensure the container uses full width */
   gap: 10px; /* Consistent spacing between draggable elements */
 }
-
 
 .draggable.dragging {
   opacity: 0.5;

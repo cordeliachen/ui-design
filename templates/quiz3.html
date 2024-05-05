@@ -23,51 +23,12 @@
           </ul>
           <div class="form-check">
             <input
-              class="form-check-input quiz-option-input"
-              type="radio"
+              type="text"
               name="question1"
-              id="slip"
-              value="Slip knot"
+              class="form-control"
+              id="q3input"
+              placeholder="Enter knot type"
             />
-            <label class="form-check-label quiz-option-label" for="slip">
-              Slip knot
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input quiz-option-input"
-              type="radio"
-              name="question1"
-              id="single"
-              value="Single crochet"
-            />
-            <label class="form-check-label quiz-option-label" for="single">
-              Single crochet
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input quiz-option-input"
-              type="radio"
-              name="question1"
-              id="half"
-              value="Half double crochet"
-            />
-            <label class="form-check-label quiz-option-label" for="half">
-              Half double crochet
-            </label>
-          </div>
-          <div class="form-check">
-            <input
-              class="form-check-input quiz-option-input"
-              type="radio"
-              name="question1"
-              id="double"
-              value="Double crochet"
-            />
-            <label class="form-check-label quiz-option-label" for="double">
-              Double crochet
-            </label>
           </div>
         </div>
         <div class="d-flex justify-content-between">
@@ -109,6 +70,8 @@
           messageBox.className = "alert alert-danger";
           messageBox.textContent = "Incorrect, try again!";
           messageBox.style.display = "block";
+          document.getElementById("q3input").value = "";
+          document.getElementById("q3input").focus();
         }
       })
       .catch((error) => {
