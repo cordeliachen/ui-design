@@ -47,8 +47,37 @@
             </form>
         </div>
     </div>
+    <div id="messageBox" class="alert" style="position: fixed; bottom: 20px; right: 20px; display: none;"></div>
 </div>
+
+<script>
+document.getElementById('quizForm').onsubmit = function(event) {
+    event.preventDefault();
+    var form = this;
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form)
+    }).then(response => response.json())
+      .then(data => {
+        var messageBox = document.getElementById('messageBox');
+        if (data.correct) {
+            messageBox.className = 'alert alert-success';
+            messageBox.textContent = 'Correct! Redirecting...';
+            messageBox.style.display = 'block';
+            setTimeout(() => window.location.href = data.next_url, 2000);
+        } else {
+            messageBox.className = 'alert alert-danger';
+            messageBox.textContent = 'Incorrect, try again!';
+            messageBox.style.display = 'block';
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+};
+</script>
 {% endblock %}
+
+
 
 
 
