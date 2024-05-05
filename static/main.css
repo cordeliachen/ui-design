@@ -118,6 +118,7 @@
   gap: 20px; /* Adds space between buttons */
 }
 
+
 .draggable-t.dragging {
   opacity: 0.5; /* Makes the draggable semi-transparent while dragging */
   cursor: grabbing;
@@ -149,6 +150,7 @@
   width: 100%; /* Ensure the container uses full width */
   gap: 10px; /* Consistent spacing between draggable elements */
 }
+
 
 .draggable.dragging {
   opacity: 0.5;
