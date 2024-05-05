@@ -55,7 +55,6 @@ def quiz1():
 
 @app.route("/quiz2")
 def quiz2():
-    print(data.get("6")["steps"])
     return render_template(
         "quiz2.html", data=data.values(), steps=data.get("6")["steps"]
     )
@@ -63,7 +62,9 @@ def quiz2():
 
 @app.route("/quiz3")
 def quiz3():  # Corrected function name
-    return render_template("quiz3.html", data=data.values())
+    return render_template(
+        "quiz3.html", data=data.values(), steps=data.get("8")["steps"]
+    )
 
 
 @app.route("/quiz4")
@@ -92,7 +93,7 @@ def submit_quiz(quiz_id):
     correct_answers = {
         1: {"question1": "False", "question2": "The tools used"},
         2: {"question1": "Single crochet"},
-        3: {"question1": "True", "question2": "The tools used"},
+        3: {"question1": "Double crochet"},
         4: {"question1": "False", "question2": "The type of yarn used"},
     }
     total_quizzes = 4
