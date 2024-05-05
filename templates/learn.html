@@ -59,23 +59,6 @@
     <a href="{{ url_for('quiz1') }}" class="btn quiz-success">Start Quiz</a>
     <div class="space-mt"></div>
     {% endif %}
-
-    <div class="d-flex justify-content-between align-items-center mt-4">
-        {% if lesson['id'] > 1 %}
-        <a href="{{ url_for('learn', lesson_id=lesson['id'] - 1) }}" class="btn quiz-btn-secondary">Previous</a>
-        <div class="space-mt"></div>
-        {% else %}
-        <a href="/" class="btn quiz-btn-secondary">To Home</a>
-        <div class="space-mt"></div>
-        {% endif %}
-
-        {% if lesson['id'] < max_lesson_id %}
-        <a href="{{ url_for('learn', lesson_id=lesson['id'] + 1) }}" class="btn quiz-btn-primary">Next</a>
-        <div class="space-mt"></div>
-        {% else %}
-        <a href="{{ url_for('quiz1') }}" class="btn quiz-success">Start Quiz</a>
-        <div class="space-mt"></div>
-        {% endif %}
-    </div>
+  </div>
 </div>
 {% endblock %}
