@@ -81,15 +81,6 @@ import random
 def quiz5():
     quiz_data = data.get("9", {})  # Safely get data for quiz 9
     steps = list(quiz_data.get("steps", {}).values())
-    
-    # Generate a list of shuffled step IDs
-    shuffled_step_ids = [f"step{i+1}" for i in range(len(steps))]
-    random.shuffle(shuffled_step_ids)
-    
-    # Assign shuffled IDs to steps for display
-    for index, step in enumerate(steps):
-        step["id"] = shuffled_step_ids[index]
-    
     return render_template("quiz5.html", steps=steps)
 
 
