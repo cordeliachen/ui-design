@@ -138,15 +138,11 @@ def submit_order_quiz(quiz_id):
         # Update session score
         score = session.get("score", 0) + 1  # Increment score by 1 for correct arrangement
         session["score"] = score
-
-    # Determine the next URL
-    next_url = url_for("quiz5") if quiz_id == 4 else url_for("feedback") if quiz_id == 5 else url_for("home")
-
-    # Return response
-    return jsonify({
-        "correct": correct,
-        "next_url": next_url
-    }), 200 if correct else 400
+    response = {
+    "correct": correct,
+    "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id == 4 else url_for("feedback") if quiz_id == 5 else url_for("home")
+    }
+    return json.dumps(response), 200 if correct else 400
 
 
 
