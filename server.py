@@ -68,8 +68,10 @@ def quiz3():  # Corrected function name
 
 
 @app.route("/quiz4")
-def quiz4():  # Corrected function name
-    return render_template("quiz4.html", data=data)
+def quiz4():
+    quiz_data = data.get("4", {})  # Safely get data for quiz 4 with a default fallback
+    return render_template("quiz4.html", quiz_data=quiz_data)
+
 
 
 import random
