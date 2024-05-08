@@ -44,11 +44,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     draggables.forEach(draggable => {
         draggable.addEventListener('dragstart', function(e) {
+            console.log('Drag start:', draggable.id);
             e.dataTransfer.setData('text/plain', draggable.id);
             draggable.classList.add('dragging');
         });
 
         draggable.addEventListener('dragend', function(e) {
+            console.log('Drag end:', draggable.id);
             draggable.classList.remove('dragging');
         });
 
@@ -57,8 +59,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const afterElement = getDragAfterElement(container, e.clientX);
             const dragging = document.querySelector('.dragging');
             if (afterElement == null) {
+                console.log('After element:', null);
                 container.appendChild(dragging);
             } else {
+                console.log('After element:', afterElement.id);
                 container.insertBefore(dragging, afterElement);
             }
         });
@@ -77,8 +81,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
 });
+
 function submitOrder() {
+    console.log('Submit order clicked');
     const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.id);
+    console.log('Order:', order);
     fetch('/submit_order_quiz/5', {
         method: 'POST',
         headers: {
@@ -86,8 +93,12 @@ function submitOrder() {
         },
         body: JSON.stringify({ order: order })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Response:', response);
+        return response.json();
+    })
     .then(data => {
+        console.log('Data:', data);
         var messageBox = document.getElementById("messageBox");
         if (data.correct) {
             messageBox.className = "alert alert-success";
@@ -104,7 +115,6 @@ function submitOrder() {
         console.error('Error:', error);
     });
 }
-
-
 </script>
 {% endblock %}
+
