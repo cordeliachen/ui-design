@@ -95,34 +95,24 @@ def submit_quiz(quiz_id):
         2: {"question1": "Single crochet"},
         3: {"question1": "Double crochet"},
         4: {"question1": "False", "question2": "The type of yarn used"},
+        5: {"question2": "Slip Knot"}  # Added for quiz 5 second question
     }
-    total_quizzes = 4
+    total_quizzes = 6  # Total number of quizzes now includes quiz 5
     score = session.get("score", 0)
     quiz_answers = correct_answers.get(quiz_id, {})
 
-    correct = True
-    for key, correct_answer in quiz_answers.items():
-        if request.form.get(key) != correct_answer:
-            if quiz_id == 3:
-                ans = request.form.get(key).lower()
-                if ans == "double crochet" or ans == "double":
-                    continue
-            correct = False
-            break
-
+    correct = all(request.form.get(key) == quiz_answers[key] for key in quiz_answers)
     if correct:
         score += len(quiz_answers)  # Increment score by the number of correct answers
         session["score"] = score
 
     response = {
         "correct": correct,
-        "next_url": (
-            url_for(f"quiz{quiz_id + 1}")
-            if quiz_id < total_quizzes
-            else url_for("feedback")
-        ),
+        "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id < total_quizzes else url_for("feedback")
     }
     return json.dumps(response), 200 if correct else 400
+
+
 
 
 @app.route("/update_score_6", methods=["POST"])
