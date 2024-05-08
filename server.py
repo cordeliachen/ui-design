@@ -82,7 +82,7 @@ def quiz5():
     quiz_data = data.get("9", {})  # Safely get data for quiz 9
     steps = list(quiz_data.get("steps", {}).values())
     random.shuffle(steps)  # Shuffle the steps to scramble them on each page load
-    return render_template("quiz5.html", steps=steps, data=quiz_data)
+    return render_template("quiz5.html", steps=steps, data=data.values())
 
 
 @app.route("/quiz6")
