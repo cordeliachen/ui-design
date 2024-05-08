@@ -78,7 +78,7 @@ function submitOrder() {
             messageBox.className = "alert alert-success";
             messageBox.textContent = "Correct! Redirecting...";
             messageBox.style.display = "block";
-            setTimeout(() => (window.location.href = '{{ url_for("quiz6") }}';), 2000);
+            setTimeout(() => (window.location.href = '{{ url_for("quiz5") }}';), 2000);
         } else {
             messageBox.className = "alert alert-danger";
             messageBox.textContent = "Incorrect, try again!";
