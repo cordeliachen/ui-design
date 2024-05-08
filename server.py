@@ -97,13 +97,20 @@ def submit_quiz(quiz_id):
         2: {"question1": "Single crochet"},
         3: {"question1": "Double crochet"},
         4: {"question1": "False", "question2": "The type of yarn used"},
-        5: {"question2": "Slip Knot"}  # Added for quiz 5 second question
+        5: {"question2": "Slip Knot"}  # Updated for quiz 5 second question
     }
     total_quizzes = 6  # Total number of quizzes now includes quiz 5
     score = session.get("score", 0)
     quiz_answers = correct_answers.get(quiz_id, {})
 
-    correct = all(request.form.get(key) == quiz_answers[key] for key in quiz_answers)
+    if quiz_id == 5:
+        # Check if the user's answer for the multiple-choice question is correct
+        user_answer = request.form.get("question2", "")
+        correct = user_answer == quiz_answers.get("question2", "")
+    else:
+        # Check if all the user's answers match the correct answers
+        correct = all(request.form.get(key) == quiz_answers.get(key, "") for key in quiz_answers)
+
     if correct:
         score += len(quiz_answers)  # Increment score by the number of correct answers
         session["score"] = score
@@ -113,6 +120,7 @@ def submit_quiz(quiz_id):
         "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id < total_quizzes else url_for("feedback")
     }
     return json.dumps(response), 200 if correct else 400
+
 
 @app.route("/submit_order_quiz/<int:quiz_id>", methods=["POST"])
 def submit_order_quiz(quiz_id):
