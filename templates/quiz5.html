@@ -78,12 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 function submitOrder() {
-    var order = [];
-    var steps = document.getElementsByClassName('draggable');
-    for (var i = 0; i < steps.length; i++) {
-        order.push(steps[i].id);
-    }
-    
+    const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
     fetch('/check_order', {
         method: 'POST',
         headers: {
