@@ -15,7 +15,7 @@
     <div class="row justify-content-center mt-4">
         <div class="col-md-8 d-flex justify-content-between align-items-center">
             <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz3') }}'">Previous</button>
-            <button class="btn quiz-btn-primary" onclick="location.href='{{ url_for('quiz5') }}'">Next</button> <!-- Removed direct navigation -->
+            <button class="btn quiz-btn-primary" onclick="submitOrder()">Next</button> <!-- Removed direct navigation -->
         </div>
     </div>
 </div>
@@ -74,7 +74,8 @@ function submitOrder() {
     .then(response => response.json())
     .then(data => {
         if (data.correct) {
-            window.location.href = data.next_url;
+            // If order submission is correct, redirect to Quiz 5
+            window.location.href = '{{ url_for("quiz5") }}';
         } else {
             alert('Incorrect, try again!');
         }
