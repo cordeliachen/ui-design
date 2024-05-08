@@ -139,7 +139,7 @@ def submit_order_quiz(quiz_id):
     # Correct order for Quiz 4
     correct_order_quiz4 = ['step3', 'step2', 'step4', 'step1']
     # Correct order for Quiz 5
-    correct_order_quiz5 = ['step3', 'step1', 'step4', 'step2']
+    correct_order_quiz5 = ['step1', 'step2', 'step3', 'step4']
 
     # Select correct order based on quiz_id
     if quiz_id == 4:
