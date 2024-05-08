@@ -5,7 +5,7 @@
     <h1 class="text-center">Order the Steps for Crocheting Technique (5/6)</h1>
     <div id="draggable-container" class="d-flex flex-row align-items-center justify-content-center mt-3 gap-3" style="overflow-x: auto; white-space: nowrap;">
         {% for step in steps %}
-        <img src="{{ step.image }}" class="draggable-t" draggable="true" id="step{{ loop.index }}" alt="Step {{ loop.index }}" style="max-width: 100%; height: auto;">
+        <img src="{{ step.image }}" class="draggable" draggable="true" id="{{ step.id }}" alt="Step {{ loop.index }}" style="max-width: 100%; height: auto;">
         {% endfor %}
     </div>
 
@@ -39,7 +39,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const draggables = document.querySelectorAll('.draggable-t');
+    const draggables = document.querySelectorAll('.draggable');
     const container = document.getElementById('draggable-container');
 
     draggables.forEach(draggable => {
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function getDragAfterElement(container, x) {
-        const draggableElements = [...container.querySelectorAll('.draggable-t:not(.dragging)')];
+        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
         return draggableElements.reduce((closest, child) => {
             const box = child.getBoundingClientRect();
             const offset = x - box.left - box.width / 2;
@@ -79,26 +79,24 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function submitOrder() {
-    const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
-    fetch('{{ url_for("submit_order_quiz", quiz_id=5) }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ order: order })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.correct) {
-            // If order submission is correct, redirect to Quiz 6
-            window.location.href = '{{ url_for("quiz6") }}';
-        } else {
-            alert('Incorrect, try again!');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.id);
+    const correctOrder = {{ correct_order | tojson }};
+    const isCorrect = arraysEqual(order, correctOrder);
+    if (isCorrect) {
+        // If order submission is correct, redirect to Quiz 6
+        window.location.href = '{{ url_for("quiz6") }}';
+    } else {
+        alert('Incorrect, try again!');
+    }
+}
+
+// Function to check if two arrays are equal
+function arraysEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) return false;
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) return false;
+    }
+    return true;
 }
 </script>
 {% endblock %}
