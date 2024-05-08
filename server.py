@@ -90,10 +90,7 @@ def quiz5():
     for index, step in enumerate(steps):
         step["id"] = shuffled_step_ids[index]
     
-    # Define the correct order
-    correct_order = [step["id"] for step in steps]
-    
-    return render_template("quiz5.html", steps=steps, correct_order=correct_order)
+    return render_template("quiz5.html", steps=steps)
 
 
 
