@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function submitOrder() {
     const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
+    console.log(order); // Debugging output
     fetch('{{ url_for("submit_order_quiz", quiz_id=5) }}', {
         method: 'POST',
         headers: {
@@ -100,5 +101,6 @@ function submitOrder() {
         console.error('Error:', error);
     });
 }
+
 </script>
 {% endblock %}
