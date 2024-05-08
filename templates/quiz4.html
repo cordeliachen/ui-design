@@ -6,18 +6,19 @@
     <div class="space-mt"></div>
     
     <div id="draggable-container-t" class="d-flex flex-column align-items-center mt-3 gap-3">
-        <button class="btn btn-info draggable-t" draggable="true" id="step1">Pull the yarn through both loops on your hook</button>
-        <button class="btn btn-info draggable-t" draggable="true" id="step2">Grab the yarn from your forefinger and pull it through</button>
-        <button class="btn btn-info draggable-t" draggable="true" id="step3">Insert your hook into the stitch</button>
-        <button class="btn btn-info draggable-t" draggable="true" id="step4">Bring the yarn over your hook</button>
+        <div class="draggable-t" draggable="true" id="step1">Pull the yarn through both loops on your hook</div>
+        <div class="draggable-t" draggable="true" id="step2">Grab the yarn from your forefinger and pull it through</div>
+        <div class="draggable-t" draggable="true" id="step3">Insert your hook into the stitch</div>
+        <div class="draggable-t" draggable="true" id="step4">Bring the yarn over your hook</div>
     </div>
     
     <div class="row justify-content-center mt-4">
         <div class="col-md-8 d-flex justify-content-between align-items-center">
             <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz3') }}'">Previous</button>
-            <button class="btn quiz-btn-primary" onclick="submitOrder()">Next</button> <!-- Removed direct navigation -->
+            <button class="btn quiz-btn-primary" onclick="submitOrder()">Next</button>
         </div>
     </div>
+    <div id="messageBox" class="alert" style="display: none;"></div>
 </div>
 
 <script>
@@ -34,17 +35,17 @@ document.addEventListener('DOMContentLoaded', function () {
         draggable.addEventListener('dragend', function(e) {
             draggable.classList.remove('dragging');
         });
+    });
 
-        container.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            const afterElement = getDragAfterElement(container, e.clientY);
-            const dragging = document.querySelector('.dragging');
-            if (afterElement == null) {
-                container.appendChild(dragging);
-            } else {
-                container.insertBefore(dragging, afterElement);
-            }
-        });
+    container.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(container, e.clientY);
+        const dragging = document.querySelector('.dragging');
+        if (afterElement == null) {
+            container.appendChild(dragging);
+        } else {
+            container.insertBefore(dragging, afterElement);
+        }
     });
 });
 
@@ -78,7 +79,7 @@ function submitOrder() {
             messageBox.className = "alert alert-success";
             messageBox.textContent = "Correct! Redirecting...";
             messageBox.style.display = "block";
-            setTimeout(() => (window.location.href = '{{ url_for("quiz5") }}';), 2000);
+            setTimeout(() => (window.location.href = '{{ url_for("quiz5") }}'), 2000);
         } else {
             messageBox.className = "alert alert-danger";
             messageBox.textContent = "Incorrect, try again!";
@@ -91,3 +92,4 @@ function submitOrder() {
 }
 </script>
 {% endblock %}
+
