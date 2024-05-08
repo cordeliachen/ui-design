@@ -82,12 +82,18 @@ def quiz5():
     quiz_data = data.get("9", {})  # Safely get data for quiz 9
     steps = list(quiz_data.get("steps", {}).values())
     
-    # Assign unique IDs to each step
-    for index, step in enumerate(steps, start=1):
-        step["id"] = f"step{index}"
+    # Generate a list of shuffled step IDs
+    shuffled_step_ids = [f"step{i+1}" for i in range(len(steps))]
+    random.shuffle(shuffled_step_ids)
     
-    random.shuffle(steps)  # Shuffle the steps to scramble them on each page load
-    return render_template("quiz5.html", steps=steps)
+    # Assign shuffled IDs to steps for display
+    for index, step in enumerate(steps):
+        step["id"] = shuffled_step_ids[index]
+    
+    # Define the correct order
+    correct_order = [step["id"] for step in steps]
+    
+    return render_template("quiz5.html", steps=steps, correct_order=correct_order)
 
 
 
