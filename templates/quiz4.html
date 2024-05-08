@@ -71,29 +71,6 @@ function submitOrder() {
         },
         body: JSON.stringify({ order: order })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.correct) {
-            // If order submission is correct, redirect to Quiz 5
-            window.location.href = '{{ url_for("quiz5") }}';
-        } else {
-            alert('Incorrect, try again!');
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-}
-</script>
-{% endblock %}
-<script>
-document.getElementById("quizForm4").onsubmit = function (event) {
-    event.preventDefault();
-    var form = this;
-    fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-    })
     .then((response) => response.json())
     .then((data) => {
         var messageBox = document.getElementById("messageBox");
@@ -111,5 +88,6 @@ document.getElementById("quizForm4").onsubmit = function (event) {
     .catch((error) => {
         console.error("Error:", error);
     });
-};
+}
 </script>
+{% endblock %}
