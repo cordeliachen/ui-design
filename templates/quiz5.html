@@ -29,9 +29,9 @@
     </div>
 
     <div class="row justify-content-center mt-4">
-        <div class="col-md-8 d-flex justify-content-between">
-            <button onclick="location.href='{{ url_for('quiz4') }}'" class="btn quiz-btn-secondary">Previous</button>
-            <button onclick="submitOrder()" class="btn quiz-btn-primary">Next</button>
+        <div class="col-md-8 d-flex justify-content-between align-items-center">
+            <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz4') }}'">Previous</button>
+            <button class="btn quiz-btn-primary" onclick="submitOrder()">Next</button> <!-- Removed direct navigation -->
         </div>
     </div>
     
