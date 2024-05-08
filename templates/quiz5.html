@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function submitOrder() {
-    const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.id);
+    const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.alt);
     const correctOrder = {{ correct_order | tojson }};
     const isCorrect = arraysEqual(order, correctOrder);
     if (isCorrect) {
