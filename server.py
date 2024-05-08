@@ -80,12 +80,9 @@ import random
 @app.route("/quiz5")
 def quiz5():
     quiz_data = data.get("9", {})  # Safely get data for quiz 9
-    correct_order = [
-        {"id": f"step{i+1}", "image": step["image"]} for i, step in enumerate(quiz_data.get("steps", {}).values())
-    ]
-    wrong_order = correct_order[:]  # Copy the correct order
-    random.shuffle(wrong_order)  # Shuffle the wrong order
-    return render_template("quiz5.html", correct_order=correct_order, wrong_order=wrong_order)
+    steps = list(quiz_data.get("steps", {}).values())
+    random.shuffle(steps)  # Shuffle the steps to scramble them on each page load
+    return render_template("quiz5.html", steps=steps)
 
 
 
