@@ -69,7 +69,7 @@ def quiz3():  # Corrected function name
 
 @app.route("/quiz4")
 def quiz4():  # Corrected function name
-    return render_template("quiz4.html", data=data.values())
+    return render_template("quiz4.html", data=data)
 
 
 import random
