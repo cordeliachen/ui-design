@@ -1,99 +1,135 @@
-{% extends "layout.html" %}
-
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">Drag the steps into the correct order (4/6)</h1>
-    <div class="space-mt"></div>
-    
-    <div id="draggable-container-t" class="d-flex flex-column align-items-center mt-3 gap-3">
-        <div class="draggable-t" draggable="true" id="step1">Pull the yarn through both loops on your hook</div>
-        <div class="draggable-t" draggable="true" id="step2">Grab the yarn from your forefinger and pull it through</div>
-        <div class="draggable-t" draggable="true" id="step3">Insert your hook into the stitch</div>
-        <div class="draggable-t" draggable="true" id="step4">Bring the yarn over your hook</div>
-    </div>
-    
-    <div class="row justify-content-center mt-4">
-        <div class="col-md-8 d-flex justify-content-between align-items-center">
-            <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz3') }}'">Previous</button>
-            <button class="btn quiz-btn-primary" onclick="submitOrder()">Next</button>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center mb-4">
+        Drag the steps into the correct order (4/6)
+      </h1>
+      <div class="quiz-container quiz-form-padding">
+        <div
+          id="draggable-container-t"
+          class="d-flex flex-column align-items-center mt-3 gap-3"
+        >
+          <div class="draggable-t" draggable="true" id="step1">
+            Pull the yarn through all three loops on your hook. There should now
+            be one loop on your hook.
+          </div>
+          <div class="draggable-t" draggable="true" id="step2">
+            Insert the hook into both front loops of the next stitch. Sweep your
+            hook under and around the yarn and pull the yarn through the stitch.
+            There should now be three loops on your hook.
+          </div>
+          <div class="draggable-t" draggable="true" id="step3">
+            Sweep your hook under and around the yarn.
+          </div>
+          <div class="draggable-t" draggable="true" id="step4">
+            Sweep your hook under and around the yarn again.
+          </div>
         </div>
+
+        <div class="row justify-content-center mt-4">
+          <div
+            class="col-md-8 d-flex justify-content-between align-items-center"
+          >
+            <button
+              class="btn quiz-btn-secondary"
+              onclick="location.href='{{ url_for('quiz3') }}'"
+            >
+              Previous
+            </button>
+            <button class="btn quiz-btn-primary" onclick="submitOrder()">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div
+  </div>
+  <div
     id="messageBox"
     class="alert"
     style="position: fixed; bottom: 20px; right: 20px; display: none"
-    ></div>
+  ></div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const draggables = document.querySelectorAll('.draggable-t');
-    const container = document.getElementById('draggable-container-t');
+  document.addEventListener("DOMContentLoaded", function () {
+    const draggables = document.querySelectorAll(".draggable-t");
+    const container = document.getElementById("draggable-container-t");
 
-    draggables.forEach(draggable => {
-        draggable.addEventListener('dragstart', function(e) {
-            e.dataTransfer.setData('text/plain', draggable.id);
-            draggable.classList.add('dragging');
-        });
+    draggables.forEach((draggable) => {
+      draggable.addEventListener("dragstart", function (e) {
+        e.dataTransfer.setData("text/plain", draggable.id);
+        draggable.classList.add("dragging");
+      });
 
-        draggable.addEventListener('dragend', function(e) {
-            draggable.classList.remove('dragging');
-        });
+      draggable.addEventListener("dragend", function (e) {
+        draggable.classList.remove("dragging");
+      });
     });
 
-    container.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        const afterElement = getDragAfterElement(container, e.clientY);
-        const dragging = document.querySelector('.dragging');
-        if (afterElement == null) {
-            container.appendChild(dragging);
-        } else {
-            container.insertBefore(dragging, afterElement);
-        }
+    container.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      const afterElement = getDragAfterElement(container, e.clientY);
+      const dragging = document.querySelector(".dragging");
+      if (afterElement == null) {
+        container.appendChild(dragging);
+      } else {
+        container.insertBefore(dragging, afterElement);
+      }
     });
-});
+  });
 
-function getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.draggable-t:not(.dragging)')];
+  function getDragAfterElement(container, y) {
+    const draggableElements = [
+      ...container.querySelectorAll(".draggable-t:not(.dragging)"),
+    ];
 
-    return draggableElements.reduce((closest, child) => {
+    return draggableElements.reduce(
+      (closest, child) => {
         const box = child.getBoundingClientRect();
         const offset = y - box.top - box.height / 2;
         if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child };
+          return { offset: offset, element: child };
         } else {
-            return closest;
+          return closest;
         }
-    }, { offset: Number.NEGATIVE_INFINITY }).element;
-}
+      },
+      { offset: Number.NEGATIVE_INFINITY }
+    ).element;
+  }
 
-function submitOrder() {
-    const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
+  function submitOrder() {
+    const order = Array.from(document.querySelectorAll(".draggable-t")).map(
+      (el) => el.id
+    );
     fetch('{{ url_for("submit_order_quiz", quiz_id=4) }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ order: order })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ order: order }),
     })
-    .then((response) => response.json())
-    .then((data) => {
+      .then((response) => response.json())
+      .then((data) => {
         var messageBox = document.getElementById("messageBox");
         if (data.correct) {
-            messageBox.className = "alert alert-success";
-            messageBox.textContent = "Correct! Redirecting...";
-            messageBox.style.display = "block";
-            setTimeout(() => (window.location.href = '{{ url_for("quiz5") }}'), 2000);
+          messageBox.className = "alert alert-success";
+          messageBox.textContent = "Correct! Redirecting...";
+          messageBox.style.display = "block";
+          setTimeout(
+            () => (window.location.href = '{{ url_for("quiz5") }}'),
+            2000
+          );
         } else {
-            messageBox.className = "alert alert-danger";
-            messageBox.textContent = "Incorrect, try again!";
-            messageBox.style.display = "block";
+          messageBox.className = "alert alert-danger";
+          messageBox.textContent = "Incorrect, try again!";
+          messageBox.style.display = "block";
         }
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.error("Error:", error);
-    });
-}
+      });
+  }
 </script>
 {% endblock %}
-
