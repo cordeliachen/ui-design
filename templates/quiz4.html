@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function submitOrderQuiz(quizId) {
+function submitOrderQuiz() {
     const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.id);
-    fetch('{{ url_for("submit_order_quiz", quiz_id=quizId) }}', {
+    fetch('{{ url_for("submit_order_quiz", quiz_id=4) }}', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
