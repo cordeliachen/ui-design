@@ -4,12 +4,12 @@
 <div class="container mt-5">
     <h1 class="text-center">Order the Steps for Crocheting Technique (5/6)</h1>
     <div id="draggable-container" class="d-flex flex-row align-items-center justify-content-center mt-3 gap-3" style="overflow-x: auto; white-space: nowrap;">
-        {% for step in correct_order %}
-        <img src="{{ step.image }}" class="draggable-t" draggable="true" id="{{ step.id }}" alt="Step {{ loop.index }}" style="max-width: 100%; height: auto;">
+        {% for step in steps %}
+        <img src="{{ step.image }}" class="draggable-t" draggable="true" id="step{{ loop.index }}" alt="Step {{ loop.index }}" style="max-width: 100%; height: auto;">
         {% endfor %}
     </div>
 
-        <!-- New Question Section -->
+    <!-- New Question Section -->
     <div class="mt-5 text-center">
         <h2>What kind of knot is this?</h2>
         <div class="centered-flex mt-3">
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const draggables = document.querySelectorAll('.draggable-t');
     const container = document.getElementById('draggable-container');
 
-    draggables.forEach((draggable, index) => {
+    draggables.forEach(draggable => {
         draggable.addEventListener('dragstart', function(e) {
             e.dataTransfer.setData('text/plain', draggable.id);
             draggable.classList.add('dragging');
@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function submitOrder() {
     const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
-    console.log(order); // Debugging output
     fetch('{{ url_for("submit_order_quiz", quiz_id=5) }}', {
         method: 'POST',
         headers: {
@@ -91,7 +90,7 @@ function submitOrder() {
     .then(response => response.json())
     .then(data => {
         if (data.correct) {
-            // If order submission is correct, redirect to Quiz 5
+            // If order submission is correct, redirect to Quiz 6
             window.location.href = '{{ url_for("quiz6") }}';
         } else {
             alert('Incorrect, try again!');
@@ -101,6 +100,5 @@ function submitOrder() {
         console.error('Error:', error);
     });
 }
-
 </script>
 {% endblock %}
