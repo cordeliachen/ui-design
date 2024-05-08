@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-function submitOrderQuiz(quizId) {
-    const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.id);
-    fetch('{{ url_for("submit_order_quiz", quiz_id=quizId) }}', {
+function submitOrder() {
+    const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
+    fetch('{{ url_for("submit_order_quiz", quiz_id=5) }}', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -71,7 +71,8 @@ function submitOrderQuiz(quizId) {
     .then(response => response.json())
     .then(data => {
         if (data.correct) {
-            window.location.href = data.next_url;
+            // If order submission is correct, redirect to Quiz 5
+            window.location.href = '{{ url_for("quiz6") }}';
         } else {
             alert('Incorrect, try again!');
         }
