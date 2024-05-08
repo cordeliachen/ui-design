@@ -68,8 +68,10 @@ def quiz3():  # Corrected function name
 
 
 @app.route("/quiz4")
-def quiz4():  # Corrected function name
-    return render_template("quiz4.html", data=data.values())
+def quiz4():
+    quiz_data = data.get("4", {})  # Safely get data for quiz 4 with a default fallback
+    return render_template("quiz4.html", quiz_data=quiz_data)
+
 
 
 import random
@@ -79,8 +81,8 @@ import random
 def quiz5():
     quiz_data = data.get("9", {})  # Safely get data for quiz 9
     steps = list(quiz_data.get("steps", {}).values())
-    random.shuffle(steps)  # Shuffle the steps to scramble them on each page load
-    return render_template("quiz5.html", steps=steps, data=data.values())
+    return render_template("quiz5.html", steps=steps)
+
 
 
 @app.route("/quiz6")
@@ -95,20 +97,19 @@ def submit_quiz(quiz_id):
         2: {"question1": "Single crochet"},
         3: {"question1": "Double crochet"},
         4: {"question1": "False", "question2": "The type of yarn used"},
+        5: {"question2": "Slip Knot"}  # Updated for quiz 5 second question
     }
-    total_quizzes = 4
+    total_quizzes = 6  # Total number of quizzes now includes quiz 5
     score = session.get("score", 0)
     quiz_answers = correct_answers.get(quiz_id, {})
 
-    correct = True
-    for key, correct_answer in quiz_answers.items():
-        if request.form.get(key) != correct_answer:
-            if quiz_id == 3:
-                ans = request.form.get(key).lower()
-                if ans == "double crochet" or ans == "double":
-                    continue
-            correct = False
-            break
+    if quiz_id == 5:
+        # Check if the user's answer for the multiple-choice question is correct
+        user_answer = request.form.get("question2", "")
+        correct = user_answer == quiz_answers.get("question2", "")
+    else:
+        # Check if all the user's answers match the correct answers
+        correct = all(request.form.get(key) == quiz_answers.get(key, "") for key in quiz_answers)
 
     if correct:
         score += len(quiz_answers)  # Increment score by the number of correct answers
@@ -116,13 +117,47 @@ def submit_quiz(quiz_id):
 
     response = {
         "correct": correct,
-        "next_url": (
-            url_for(f"quiz{quiz_id + 1}")
-            if quiz_id < total_quizzes
-            else url_for("feedback")
-        ),
+        "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id < total_quizzes else url_for("feedback")
     }
     return json.dumps(response), 200 if correct else 400
+
+
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+
+# other imports...
+
+@app.route("/submit_order_quiz/<int:quiz_id>", methods=["POST"])
+def submit_order_quiz(quiz_id):
+    # Correct order for Quiz 4
+    correct_order_quiz4 = ['step3', 'step2', 'step4', 'step1']
+    # Correct order for Quiz 5
+    correct_order_quiz5 = ['step3', 'step4', 'step1', 'step2']
+
+    # Select correct order based on quiz_id
+    if quiz_id == 4:
+        correct_order = correct_order_quiz4
+    elif quiz_id == 5:
+        correct_order = correct_order_quiz5
+    else:
+        correct_order = []
+
+    # Fetch user order from request JSON data
+    request_data = request.get_json()
+    user_order = request_data.get('order', [])
+
+    # Check if user order matches the correct order
+    correct = user_order == correct_order
+    if correct:
+        # Update session score
+        score = session.get("score", 0) + 1  # Increment score by 1 for correct arrangement
+        session["score"] = score
+    response = {
+        "correct": correct,
+        "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id == 4 else url_for("feedback") if quiz_id == 5 else url_for("home")
+    }
+    return jsonify(response), 200 if correct else 400
+
+
 
 
 @app.route("/update_score_6", methods=["POST"])

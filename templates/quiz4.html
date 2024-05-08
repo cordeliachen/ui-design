@@ -2,32 +2,32 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">Drag the steps into the correct order</h1>
+    <h1 class="text-center">Drag the steps into the correct order (4/6)</h1>
     <div class="space-mt"></div>
     
-    <!-- Updated ID to match CSS -->
     <div id="draggable-container-t" class="d-flex flex-column align-items-center mt-3 gap-3">
-        <!-- Updated class names to 'draggable-t' -->
-        <button class="btn btn-info draggable-t" draggable="true" id="step1">Pull the yarn through both loops on your hook</button>
-        <button class="btn btn-info draggable-t" draggable="true" id="step2">Grab the yarn from your forefinger and pull it through</button>
-        <button class="btn btn-info draggable-t" draggable="true" id="step3">Insert your hook into the stitch</button>
-        <button class="btn btn-info draggable-t" draggable="true" id="step4">Bring the yarn over your hook</button>
+        <div class="draggable-t" draggable="true" id="step1">Pull the yarn through both loops on your hook</div>
+        <div class="draggable-t" draggable="true" id="step2">Grab the yarn from your forefinger and pull it through</div>
+        <div class="draggable-t" draggable="true" id="step3">Insert your hook into the stitch</div>
+        <div class="draggable-t" draggable="true" id="step4">Bring the yarn over your hook</div>
     </div>
     
     <div class="row justify-content-center mt-4">
         <div class="col-md-8 d-flex justify-content-between align-items-center">
             <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz3') }}'">Previous</button>
-            <div class="space-mt"></div>
-            <button class="btn quiz-btn-primary" onclick="location.href='{{ url_for('quiz5') }}'">Next</button> <!-- Adjust if quiz5 exists -->
+            <button class="btn quiz-btn-primary" onclick="submitOrder()">Next</button>
         </div>
     </div>
+    <div
+    id="messageBox"
+    class="alert"
+    style="position: fixed; bottom: 20px; right: 20px; display: none"
+    ></div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    // Updated class selector to 'draggable-t'
     const draggables = document.querySelectorAll('.draggable-t');
-    // Updated container ID to 'draggable-container-t'
     const container = document.getElementById('draggable-container-t');
 
     draggables.forEach(draggable => {
@@ -39,34 +39,61 @@ document.addEventListener('DOMContentLoaded', function () {
         draggable.addEventListener('dragend', function(e) {
             draggable.classList.remove('dragging');
         });
-
-        container.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            const afterElement = getDragAfterElement(container, e.clientY);
-            const dragging = document.querySelector('.dragging');
-            if (afterElement == null) {
-                container.appendChild(dragging);
-            } else {
-                container.insertBefore(dragging, afterElement);
-            }
-        });
     });
 
-    function getDragAfterElement(container, y) {
-        const draggableElements = [...container.querySelectorAll('.draggable-t:not(.dragging)')];
-
-        return draggableElements.reduce((closest, child) => {
-            const box = child.getBoundingClientRect();
-            const offset = y - box.top - box.height / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
-            } else {
-                return closest;
-            }
-        }, { offset: Number.NEGATIVE_INFINITY }).element;
-    }
+    container.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(container, e.clientY);
+        const dragging = document.querySelector('.dragging');
+        if (afterElement == null) {
+            container.appendChild(dragging);
+        } else {
+            container.insertBefore(dragging, afterElement);
+        }
+    });
 });
+
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.draggable-t:not(.dragging)')];
+
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+function submitOrder() {
+    const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
+    fetch('{{ url_for("submit_order_quiz", quiz_id=4) }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ order: order })
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        var messageBox = document.getElementById("messageBox");
+        if (data.correct) {
+            messageBox.className = "alert alert-success";
+            messageBox.textContent = "Correct! Redirecting...";
+            messageBox.style.display = "block";
+            setTimeout(() => (window.location.href = '{{ url_for("quiz5") }}'), 2000);
+        } else {
+            messageBox.className = "alert alert-danger";
+            messageBox.textContent = "Incorrect, try again!";
+            messageBox.style.display = "block";
+        }
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
+}
 </script>
 {% endblock %}
-
 
