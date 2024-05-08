@@ -122,6 +122,10 @@ def submit_quiz(quiz_id):
     return json.dumps(response), 200 if correct else 400
 
 
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+
+# other imports...
+
 @app.route("/submit_order_quiz/<int:quiz_id>", methods=["POST"])
 def submit_order_quiz(quiz_id):
     # Correct order for Quiz 4
@@ -137,8 +141,9 @@ def submit_order_quiz(quiz_id):
     else:
         correct_order = []
 
-    # Fetch user order from request
-    user_order = request.json.get('order', [])
+    # Fetch user order from request JSON data
+    request_data = request.get_json()
+    user_order = request_data.get('order', [])
 
     # Check if user order matches the correct order
     correct = user_order == correct_order
@@ -147,10 +152,11 @@ def submit_order_quiz(quiz_id):
         score = session.get("score", 0) + 1  # Increment score by 1 for correct arrangement
         session["score"] = score
     response = {
-    "correct": correct,
-    "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id == 4 else url_for("feedback") if quiz_id == 5 else url_for("home")
+        "correct": correct,
+        "next_url": url_for(f"quiz{quiz_id + 1}") if quiz_id == 4 else url_for("feedback") if quiz_id == 5 else url_for("home")
     }
-    return json.dumps(response), 200 if correct else 400
+    return jsonify(response), 200 if correct else 400
+
 
 
 
