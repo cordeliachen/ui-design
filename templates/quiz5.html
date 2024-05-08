@@ -100,21 +100,25 @@ function submitOrder() {
     .then(data => {
         console.log('Data:', data);
         var messageBox = document.getElementById("messageBox");
-        if (data.correct) {
-            messageBox.className = "alert alert-success";
-            messageBox.textContent = "Correct! Redirecting...";
-            messageBox.style.display = "block";
-            setTimeout(() => (window.location.href = '{{ url_for("quiz6") }}'), 2000);
+        if (messageBox) {
+            if (data.correct) {
+                messageBox.className = "alert alert-success";
+                messageBox.textContent = "Correct! Redirecting...";
+                messageBox.style.display = "block";
+                setTimeout(() => (window.location.href = data.next_url), 2000);
+            } else {
+                messageBox.className = "alert alert-danger";
+                messageBox.textContent = "Incorrect, try again!";
+                messageBox.style.display = "block";
+            }
         } else {
-            messageBox.className = "alert alert-danger";
-            messageBox.textContent = "Incorrect, try again!";
-            messageBox.style.display = "block";
+            console.error('Error: messageBox element not found');
         }
     })
     .catch(error => {
         console.error('Error:', error);
     });
-}
+
 </script>
 {% endblock %}
 
