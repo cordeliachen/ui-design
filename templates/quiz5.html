@@ -78,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 function submitOrder() {
-    const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
-    fetch('/check_order', {
+    const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.id);
+    fetch('/submit_order_quiz/5', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ function submitOrder() {
             messageBox.className = "alert alert-success";
             messageBox.textContent = "Correct! Redirecting...";
             messageBox.style.display = "block";
-            setTimeout(() => (window.location.href = '{{ url_for("quiz6") }}'), 2000);
+            setTimeout(() => (window.location.href = data.next_url), 2000);
         } else {
             messageBox.className = "alert alert-danger";
             messageBox.textContent = "Incorrect, try again!";
@@ -104,6 +104,7 @@ function submitOrder() {
         console.error('Error:', error);
     });
 }
+
 
 </script>
 {% endblock %}
