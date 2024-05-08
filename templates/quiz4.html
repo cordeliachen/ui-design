@@ -2,24 +2,28 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">Arrange the steps for starting a chain</h1>
-    <div id="draggable-container" class="d-flex flex-row align-items-center justify-content-center mt-3 gap-3" style="overflow-x: auto; white-space: nowrap;">
-        {% for step_num, step in quiz_data.get('steps', {}).items() %}
-        <img src="{{ step.image }}" class="draggable" draggable="true" id="step{{ step_num }}" alt="Step {{ step_num }}" style="max-width: 100%; height: auto;">
-        {% endfor %}
+    <h1 class="text-center">Drag the steps into the correct order</h1>
+    <div class="space-mt"></div>
+    
+    <div id="draggable-container-t" class="d-flex flex-column align-items-center mt-3 gap-3">
+        <button class="btn btn-info draggable-t" draggable="true" id="step1">Pull the yarn through both loops on your hook</button>
+        <button class="btn btn-info draggable-t" draggable="true" id="step2">Grab the yarn from your forefinger and pull it through</button>
+        <button class="btn btn-info draggable-t" draggable="true" id="step3">Insert your hook into the stitch</button>
+        <button class="btn btn-info draggable-t" draggable="true" id="step4">Bring the yarn over your hook</button>
     </div>
+    
     <div class="row justify-content-center mt-4">
-        <div class="col-md-8 d-flex justify-content-between">
-            <button onclick="location.href='{{ url_for('quiz3') }}'" class="btn quiz-btn-secondary">Previous</button>
-            <button onclick="submitOrderQuiz(4)" class="btn quiz-btn-primary">Next</button>
+        <div class="col-md-8 d-flex justify-content-between align-items-center">
+            <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz3') }}'">Previous</button>
+            <button class="btn quiz-btn-primary" onclick="submitOrder()">Next</button> <!-- Removed direct navigation -->
         </div>
     </div>
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const draggables = document.querySelectorAll('.draggable');
-    const container = document.getElementById('draggable-container');
+    const draggables = document.querySelectorAll('.draggable-t');
+    const container = document.getElementById('draggable-container-t');
 
     draggables.forEach(draggable => {
         draggable.addEventListener('dragstart', function(e) {
@@ -33,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         container.addEventListener('dragover', function(e) {
             e.preventDefault();
-            const afterElement = getDragAfterElement(container, e.clientX);
+            const afterElement = getDragAfterElement(container, e.clientY);
             const dragging = document.querySelector('.dragging');
             if (afterElement == null) {
                 container.appendChild(dragging);
@@ -44,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function submitOrderQuiz() {
-    const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.id);
+function submitOrder() {
+    const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.id);
     fetch('{{ url_for("submit_order_quiz", quiz_id=4) }}', {
         method: 'POST',
         headers: {
