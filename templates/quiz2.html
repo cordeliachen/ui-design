@@ -1,104 +1,121 @@
-{% extends "layout.html" %}
-
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">Quiz</h1>
-    <p class="lead text-center">Answer the following question:</p>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="mb-4">
-                <p><strong>What kind of knot is this?</strong></p>
-                <p>Insert your hook into the stitch:</p>
-                <ul>
-                    <li>Grab the yarn from your forefinger and pull it through</li>
-                    <li>Bring the yarn over your hook</li>
-                    <li>Pull it through both loops on your hook</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-md-4 d-flex flex-column align-items-start justify-content-start">
-            <form id="answerForm" action="{{ url_for('submit_quiz', quiz_id=3) }}" method="POST">
-                <button type="button" name="knotType" value="Slip Knot" class="btn btn-primary mb-2 answer-button">Slip Knot</button>
-                <button type="button" name="knotType" value="Single Crochet" class="btn btn-primary mb-2 answer-button">Single Crochet</button>
-                <button type="button" name="knotType" value="Half Double Crochet" class="btn btn-primary mb-2 answer-button">Half Double Crochet</button>
-                <button type="button" name="knotType" value="Double Crochet" class="btn btn-primary mb-2 answer-button">Double Crochet</button>
-            </form>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center mb-4">Answer the following questions (2/6)</h1>
 
-        <div class="row justify-content-center mt-4">
-            <div class="col-md-8 d-flex justify-content-between align-items-center">
-                <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz1') }}'">Previous</button>
-                <button id="nextButton" class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz3') }}'">Next</button>
-            </div>
+      <form
+        id="quizForm2"
+        action="{{ url_for('submit_quiz', quiz_id=2) }}"
+        method="post"
+        class="quiz-container quiz-form-padding"
+      >
+        <div class="mb-4">
+          <p class="quiz-question">What kind of knot is this?</p>
+          <ul>
+            {% for step_num, step_data in steps.items() %} {% if not loop.last
+            %}
+            <li>
+              {% for substep in step_data['description'] %} {{ substep }} {%
+              endfor %}
+            </li>
+            {% endif %} {% endfor %}
+          </ul>
+          <div class="form-check">
+            <input
+              class="form-check-input quiz-option-input"
+              type="radio"
+              name="question1"
+              id="slip"
+              value="Slip knot"
+            />
+            <label class="form-check-label quiz-option-label" for="slip">
+              Slip knot
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input quiz-option-input"
+              type="radio"
+              name="question1"
+              id="single"
+              value="Single crochet"
+            />
+            <label class="form-check-label quiz-option-label" for="single">
+              Single crochet
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input quiz-option-input"
+              type="radio"
+              name="question1"
+              id="half"
+              value="Half double crochet"
+            />
+            <label class="form-check-label quiz-option-label" for="half">
+              Half double crochet
+            </label>
+          </div>
+          <div class="form-check">
+            <input
+              class="form-check-input quiz-option-input"
+              type="radio"
+              name="question1"
+              id="double"
+              value="Double crochet"
+            />
+            <label class="form-check-label quiz-option-label" for="double">
+              Double crochet
+            </label>
+          </div>
         </div>
-
+        <div class="d-flex justify-content-between">
+          <a href="{{ url_for('home') }}" class="btn quiz-btn-secondary"
+            >Home</a
+          >
+          <div class="space-mt"></div>
+          <button type="submit" class="btn quiz-btn-primary">Next</button>
+        </div>
+      </form>
     </div>
+  </div>
+  <div
+    id="messageBox"
+    class="alert"
+    style="position: fixed; bottom: 20px; right: 20px; display: none"
+  ></div>
 </div>
-{% endblock %}
+
+
+
+
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const answerButtons = document.querySelectorAll('.answer-button');
-    const nextButton = document.getElementById('nextButton');
-    const correctAnswer = 'Single Crochet';
-    let score = 0;
-
-    answerButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Prevent form submission
-            event.preventDefault();
-
-            // Update score if the correct answer is chosen
-            const selectedAnswer = button.value;
-            if (selectedAnswer === correctAnswer) {
-                score++;
-            }
-
-            // Change the button color when clicked
-            button.style.backgroundColor = 'grey';
-            button.style.color = 'white';
-
-            // Disable all buttons after one is clicked
-            answerButtons.forEach(btn => {
-                btn.disabled = true;
-            });
-
-            // Enable the "Next" button
-            nextButton.disabled = false;
-        });
-    });
-
-    // Redirect to the next quiz when the "Next" button is clicked
-    nextButton.addEventListener('click', function() {
-        // Prevent default form submission behavior
-        event.preventDefault();
-
-        // Send an AJAX request to update the score
-        fetch('{{ url_for("submit_quiz", quiz_id=3) }}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ score: score }), // Send the current score
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to update score');
-            }
-            // Score updated successfully
-            console.log('Score updated');
-        })
-        .catch(error => {
-            console.error('Error updating score:', error);
-        });
-
-        // Redirect to the next quiz
-        window.location.href = '{{ url_for('quiz3') }}';
-    });
-});
+  document.getElementById("quizForm2").onsubmit = function (event) {
+    event.preventDefault();
+    var form = this;
+    fetch(form.action, {
+      method: "POST",
+      body: new FormData(form),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        var messageBox = document.getElementById("messageBox");
+        if (data.correct) {
+          messageBox.className = "alert alert-success";
+          messageBox.textContent = "Correct! Redirecting...";
+          messageBox.style.display = "block";
+          setTimeout(() => (window.location.href = data.next_url), 2000);
+        } else {
+          messageBox.className = "alert alert-danger";
+          messageBox.textContent = "Incorrect, try again!";
+          messageBox.style.display = "block";
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 </script>
-
-
-
-
-
+{% endblock %}

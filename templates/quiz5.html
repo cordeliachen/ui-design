@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">Quiz</h1>
-    <p class="lead text-center">Drag the GIFs into the correct order</p>
+    <h1 class="text-center">Drag the GIFs into the correct order</h1>
+    <div class="space-top"></div>
     
     <div id="draggable-container" class="d-flex flex-row align-items-center justify-content-center mt-3 gap-3" style="overflow-x: auto; white-space: nowrap;">
         {% for step in steps %}
@@ -14,18 +14,21 @@
         <!-- New Question Section -->
     <div class="mt-5 text-center">
         <h2>What kind of knot is this?</h2>
-        <div class="d-flex justify-content-center gap-2 mt-3">
-            <button class="btn btn-primary sm-button">Slip Knot</button>
-            <button class="btn btn-primary sm-button">Single Crochet</button>
-            <button class="btn btn-primary sm-button">Half Double Crochet</button>
-            <button class="btn btn-primary sm-button">Double Crochet</button>
+        <div class="centered-flex mt-3">
+            <button class="btn knot-quiz-answer-btn mb-2" type="button">Slip Knot</button>
+            <button class="btn knot-quiz-answer-btn mb-2" type="button">Single Crochet</button>
+            <button class="btn knot-quiz-answer-btn mb-2" type="button">Half Double Crochet</button>
+            <button class="btn knot-quiz-answer-btn mb-2" type="button">Double Crochet</button>
         </div>
     </div>
+
+
     
     <div class="row justify-content-center mt-4">
         <div class="col-md-8 d-flex justify-content-between align-items-center">
-            <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz4') }}'">Previous</button>
-            <button class="btn btn-secondary small-button" onclick="location.href='{{ url_for('quiz6') }}'">Next</button> <!-- Adjust as needed -->
+            <button class="btn quiz-btn-secondary" onclick="location.href='{{ url_for('quiz4') }}'">Previous</button>
+            <div class="space-mt"></div>
+            <button class="btn quiz-btn-primary" onclick="location.href='{{ url_for('quiz6') }}'">Next</button> <!-- Adjust as needed -->
         </div>
     </div>
 </div>

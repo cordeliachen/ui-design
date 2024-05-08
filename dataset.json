@@ -15,7 +15,9 @@
         "steps": {
             "1": {
                 "description": ["Start with the end of the yarn.", "Pinch a loop with your fingers on your non-hook hand.", "Drop the long end of the string behind the loop."],
-                "image": "https://64.media.tumblr.com/66d70eab50bb006fa7dceb131cec76b3/tumblr_ml98k4jCsy1so7jgso4_r1_250.gifv"
+                "image": "https://64.media.tumblr.com/66d70eab50bb006fa7dceb131cec76b3/tumblr_ml98k4jCsy1so7jgso4_r1_250.gifv",
+                "imgWidth" : "50",
+                "imgHeight": "50"
             },
             "2": {
                 "description": ["Take your crochet hook and move it in front of the right side of the circle.", "Move your hook behind the line in the middle (the long end of the string).", "Move your hook in front of the left side of the circle."],
