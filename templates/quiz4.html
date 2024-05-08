@@ -4,13 +4,9 @@
 <div class="container mt-5">
     <h1 class="text-center">Arrange the steps for starting a chain</h1>
     <div id="draggable-container" class="d-flex flex-row align-items-center justify-content-center mt-3 gap-3" style="overflow-x: auto; white-space: nowrap;">
-        {% if quiz_data %}
-            {% for step_num, step in quiz_data.get('steps', {}).items() %}
-            <img src="{{ step.image }}" class="draggable" draggable="true" id="step{{ step_num }}" alt="Step {{ step_num }}" style="max-width: 100%; height: auto;">
-            {% endfor %}
-        {% else %}
-            <p>No steps data available.</p>
-        {% endif %}
+        {% for step_num, step in quiz_data.get('steps', {}).items() %}
+        <img src="{{ step.image }}" class="draggable" draggable="true" id="step{{ step_num }}" alt="Step {{ step_num }}" style="max-width: 100%; height: auto;">
+        {% endfor %}
     </div>
     <div class="row justify-content-center mt-4">
         <div class="col-md-8 d-flex justify-content-between">
@@ -46,19 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    function getDragAfterElement(container, x) {
-        const draggableElements = [...container.querySelectorAll('.draggable:not(.dragging)')];
-        return draggableElements.reduce((closest, child) => {
-            const box = child.getBoundingClientRect();
-            const offset = x - box.left - box.width / 2;
-            if (offset < 0 && offset > closest.offset) {
-                return { offset: offset, element: child };
-            } else {
-                return closest;
-            }
-        }, { offset: Number.NEGATIVE_INFINITY }).element;
-    }
 });
 
 function submitOrderQuiz(quizId) {
