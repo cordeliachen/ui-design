@@ -77,26 +77,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
 });
-
 function submitOrder() {
-    const order = Array.from(document.querySelectorAll('.draggable')).map(el => el.alt);
-    const correctOrder = {{ correct_order | tojson }};
-    const isCorrect = arraysEqual(order, correctOrder);
-    if (isCorrect) {
-        // If order submission is correct, redirect to Quiz 6
-        window.location.href = '{{ url_for("quiz6") }}';
-    } else {
-        alert('Incorrect, try again!');
-    }
+    const order = Array.from(document.querySelectorAll('.draggable-t')).map(el => el.alt);
+    fetch('{{ url_for("submit_order_quiz", quiz_id=5) }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ order: order })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.correct) {
+            // If order submission is correct, redirect to Quiz 5
+            window.location.href = '{{ url_for("quiz6") }}';
+        } else {
+            alert('Incorrect, try again!');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
-// Function to check if two arrays are equal
-function arraysEqual(arr1, arr2) {
-    if (arr1.length !== arr2.length) return false;
-    for (let i = 0; i < arr1.length; i++) {
-        if (arr1[i] !== arr2[i]) return false;
-    }
-    return true;
-}
 </script>
 {% endblock %}
