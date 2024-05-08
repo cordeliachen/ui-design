@@ -112,6 +112,39 @@ def submit_quiz(quiz_id):
     }
     return json.dumps(response), 200 if correct else 400
 
+@app.route("/submit_order_quiz/<int:quiz_id>", methods=["POST"])
+def submit_order_quiz(quiz_id):
+    # Correct order for Quiz 4
+    correct_order_quiz4 = ['step3', 'step2', 'step4', 'step1']
+    # Correct order for Quiz 5
+    correct_order_quiz5 = ['step4', 'step2', 'step1', 'step3']
+
+    # Select correct order based on quiz_id
+    if quiz_id == 4:
+        correct_order = correct_order_quiz4
+    elif quiz_id == 5:
+        correct_order = correct_order_quiz5
+    else:
+        correct_order = []
+
+    # Fetch user order from request
+    user_order = request.json.get('order', [])
+
+    # Check if user order matches the correct order
+    correct = user_order == correct_order
+    if correct:
+        # Update session score
+        score = session.get("score", 0) + 1  # Increment score by 1 for correct arrangement
+        session["score"] = score
+
+    # Determine the next URL
+    next_url = url_for("quiz5") if quiz_id == 4 else url_for("feedback") if quiz_id == 5 else url_for("home")
+
+    # Return response
+    return jsonify({
+        "correct": correct,
+        "next_url": next_url
+    }), 200 if correct else 400
 
 
 
