@@ -4,7 +4,7 @@
         "title": "Intro",
         "steps": {
             "1": {
-                "description": ["Today you will learn the basics you need to get started on the simplest crochet projects.", "You will need: Yarn, Crochet hook.", "That’s it!"],
+                "description": ["Today you will learn the basics you need to get started on the simplest crochet projects.", "Many people confuse crocheting and knitting; crocheting is done with a hook while knitting is done with two long needles.", "You will need: Yarn, Crochet hook.", "That’s it!"],
                 "image": "https://www.crochet365knittoo.com/wp-content/uploads/2021/01/hands-holding-yarn-and-hook.jpg"
             }
         }
@@ -60,7 +60,7 @@
                 "image": "https://64.media.tumblr.com/8184150e8495a1f5ea77924050165e04/tumblr_mlb28kFMm01so7jgso2_r2_250.gifv"
             },
             "3": {
-                "description": ["Repeat until your chain is the desired with of your project."],
+                "description": ["Repeat until your chain is the desired width of your project."],
                 "image": "https://www.thesprucecrafts.com/thmb/qsw7McAJ-Jv_2KnKQJB0IH8zHQg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ChainStitchCrochet7-5bbd0e8a46e0fb00268e3286.jpg"
             }
         }
@@ -82,7 +82,7 @@
                 "image": "https://64.media.tumblr.com/6e1c17f091b34ea92b818b45a10ba560/tumblr_mlq691VIyA1so7jgso6_250.gifv"
             },
             "4": {
-                "description": ["From here, you can continue with any of the next stitches you will learn.", "Once you finish a row, to start the next row make one chain and flip you project again."],
+                "description": ["From here, you can continue with any of the next stitches you will learn.", "Once you finish a row, to start the next row make one chain and flip your project over again."],
                 "image": "https://64.media.tumblr.com/47547afc4b789e84d70b6340a470c10f/tumblr_mlq691VIyA1so7jgso5_r2_250.gifv"
             }
 

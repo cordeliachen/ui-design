@@ -91,7 +91,7 @@ def quiz6():
 @app.route("/submit_quiz/<int:quiz_id>", methods=["POST"])
 def submit_quiz(quiz_id):
     correct_answers = {
-        1: {"question1": "False", "question2": "The tools used"},
+        1: {"question1": "True", "question2": "The tools used"},
         2: {"question1": "Single crochet"},
         3: {"question1": "Double crochet"},
         4: {"question1": "False", "question2": "The type of yarn used"},
